@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969project\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969project\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969project\\schedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:schedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Schedule.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Schedule.Designer.cs",
+              "RelativeDocumentMoniker": "Schedule.Designer.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Schedule.Designer.cs",
+              "RelativeToolTip": "Schedule.Designer.cs",
+              "ViewState": "AQIAACIBAAAAAAAAAAAWwDEBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T20:45:38.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T17:36:13.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Schedule.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Schedule.cs",
+              "RelativeDocumentMoniker": "Schedule.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Schedule.cs [Design]",
+              "RelativeToolTip": "Schedule.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T17:16:56.974Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Schedule.cs",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Schedule.cs",
+              "RelativeDocumentMoniker": "Schedule.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Schedule.cs",
+              "RelativeToolTip": "Schedule.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAIwDkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T17:36:49.864Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Login.cs",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Login.cs",
+              "RelativeDocumentMoniker": "Login.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Login.cs",
+              "RelativeToolTip": "Login.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAwwFkAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T11:58:05.01Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DatabaseController.cs",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\DatabaseController.cs",
+              "RelativeDocumentMoniker": "DatabaseController.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\DatabaseController.cs",
+              "RelativeToolTip": "DatabaseController.cs",
+              "ViewState": "AQIAACkAAAAAAAAAAAAowDUAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-18T11:30:54.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Login.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Login.cs",
+              "RelativeDocumentMoniker": "Login.cs",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969Project\\Login.cs [Design]",
+              "RelativeToolTip": "Login.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-17T23:58:20.363Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
