@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969\\c969project\\meetingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:meetingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969\\c969project\\meetingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:meetingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969\\c969project\\meetingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:meetingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A283F961-CAA8-4903-933D-2A6CA88B9158}|C969Project.csproj|c:\\users\\labuser\\documents\\github\\c969\\c969project\\databasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,49 +38,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MeetingForm.cs",
               "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\MeetingForm.cs",
               "RelativeDocumentMoniker": "MeetingForm.cs",
-              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\MeetingForm.cs",
-              "RelativeToolTip": "MeetingForm.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAswBUAAAAAAAAA",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\MeetingForm.cs*",
+              "RelativeToolTip": "MeetingForm.cs*",
+              "ViewState": "AQIAACMAAAAAAAAAAADwvzYAAABrAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T11:57:02.133Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MeetingForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\MeetingForm.cs",
               "RelativeDocumentMoniker": "MeetingForm.cs",
-              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\MeetingForm.cs [Design]",
-              "RelativeToolTip": "MeetingForm.cs [Design]",
+              "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\MeetingForm.cs [Design]*",
+              "RelativeToolTip": "MeetingForm.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-19T11:17:51.737Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Schedule.cs",
               "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\Schedule.cs",
               "RelativeDocumentMoniker": "Schedule.cs",
               "ToolTip": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\Schedule.cs",
               "RelativeToolTip": "Schedule.cs",
-              "ViewState": "AQIAAFIAAAAAAAAAAAAiwCkAAAAJAAAA",
+              "ViewState": "AQIAAF4AAAAAAAAAAAAkwHAAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-18T17:36:49.864Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Schedule.cs [Design]",
               "DocumentMoniker": "C:\\Users\\LabUser\\Documents\\GitHub\\C969\\C969Project\\Schedule.cs",
               "RelativeDocumentMoniker": "Schedule.cs",

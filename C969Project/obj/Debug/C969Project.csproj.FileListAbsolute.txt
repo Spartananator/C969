@@ -98,3 +98,4 @@ C:\Users\LabUser\Documents\GitHub\C969\C969Project\obj\Debug\fr\C969Project.reso
 C:\Users\LabUser\Documents\GitHub\C969\C969Project\obj\Debug\C969Proj.AFDA9F22.Up2Date
 C:\Users\LabUser\Documents\GitHub\C969\C969Project\obj\Debug\C969Project.exe
 C:\Users\LabUser\Documents\GitHub\C969\C969Project\obj\Debug\C969Project.pdb
+C:\Users\LabUser\Documents\GitHub\C969\C969Project\obj\Debug\C969Project.MeetingForm.resources

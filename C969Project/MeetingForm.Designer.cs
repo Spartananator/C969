@@ -29,32 +29,38 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.customerGridShort = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.titleLbl = new System.Windows.Forms.Label();
             this.startLbl = new System.Windows.Forms.Label();
             this.endLabel = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.urlBox = new System.Windows.Forms.TextBox();
+            this.typeBox = new System.Windows.Forms.TextBox();
+            this.contactBox = new System.Windows.Forms.TextBox();
+            this.locationBox = new System.Windows.Forms.TextBox();
+            this.endMinute = new System.Windows.Forms.ComboBox();
+            this.startMinute = new System.Windows.Forms.ComboBox();
+            this.endHour = new System.Windows.Forms.ComboBox();
+            this.startHour = new System.Windows.Forms.ComboBox();
+            this.endDate = new System.Windows.Forms.DateTimePicker();
+            this.startDate = new System.Windows.Forms.DateTimePicker();
+            this.descriptionBox = new System.Windows.Forms.RichTextBox();
+            this.titleBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.customerGridShort = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customerGridShort)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerGridShort)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -63,26 +69,17 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customerGridShort, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(697, 426);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(706, 426);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // customerGridShort
-            // 
-            this.customerGridShort.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerGridShort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerGridShort.Location = new System.Drawing.Point(454, 3);
-            this.customerGridShort.Name = "customerGridShort";
-            this.customerGridShort.Size = new System.Drawing.Size(240, 420);
-            this.customerGridShort.TabIndex = 0;
             // 
             // panel1
             // 
@@ -94,23 +91,23 @@
             this.panel1.Controls.Add(this.titleLbl);
             this.panel1.Controls.Add(this.startLbl);
             this.panel1.Controls.Add(this.endLabel);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.comboBox3);
-            this.panel1.Controls.Add(this.comboBox4);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.dateTimePicker2);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.urlBox);
+            this.panel1.Controls.Add(this.typeBox);
+            this.panel1.Controls.Add(this.contactBox);
+            this.panel1.Controls.Add(this.locationBox);
+            this.panel1.Controls.Add(this.endMinute);
+            this.panel1.Controls.Add(this.startMinute);
+            this.panel1.Controls.Add(this.endHour);
+            this.panel1.Controls.Add(this.startHour);
+            this.panel1.Controls.Add(this.endDate);
+            this.panel1.Controls.Add(this.startDate);
+            this.panel1.Controls.Add(this.descriptionBox);
+            this.panel1.Controls.Add(this.titleBox);
             this.panel1.Controls.Add(this.submitButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(415, 420);
+            this.panel1.Size = new System.Drawing.Size(444, 420);
             this.panel1.TabIndex = 2;
             // 
             // titleLbl
@@ -126,7 +123,7 @@
             // 
             this.startLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.startLbl.AutoSize = true;
-            this.startLbl.Location = new System.Drawing.Point(371, 63);
+            this.startLbl.Location = new System.Drawing.Point(400, 63);
             this.startLbl.Name = "startLbl";
             this.startLbl.Size = new System.Drawing.Size(29, 13);
             this.startLbl.TabIndex = 33;
@@ -136,128 +133,163 @@
             // 
             this.endLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.endLabel.AutoSize = true;
-            this.endLabel.Location = new System.Drawing.Point(371, 103);
+            this.endLabel.Location = new System.Drawing.Point(400, 103);
             this.endLabel.Name = "endLabel";
             this.endLabel.Size = new System.Drawing.Size(26, 13);
             this.endLabel.TabIndex = 32;
             this.endLabel.Text = "End";
             // 
-            // textBox5
+            // urlBox
             // 
-            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox5.Location = new System.Drawing.Point(230, 119);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(182, 20);
-            this.textBox5.TabIndex = 31;
+            this.urlBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.urlBox.Location = new System.Drawing.Point(259, 119);
+            this.urlBox.Name = "urlBox";
+            this.urlBox.Size = new System.Drawing.Size(182, 20);
+            this.urlBox.TabIndex = 31;
             // 
-            // textBox4
+            // typeBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(6, 119);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(163, 20);
-            this.textBox4.TabIndex = 30;
+            this.typeBox.Location = new System.Drawing.Point(6, 119);
+            this.typeBox.Name = "typeBox";
+            this.typeBox.Size = new System.Drawing.Size(163, 20);
+            this.typeBox.TabIndex = 30;
             // 
-            // textBox3
+            // contactBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(6, 80);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(163, 20);
-            this.textBox3.TabIndex = 29;
+            this.contactBox.Location = new System.Drawing.Point(6, 80);
+            this.contactBox.Name = "contactBox";
+            this.contactBox.Size = new System.Drawing.Size(163, 20);
+            this.contactBox.TabIndex = 29;
             // 
-            // textBox2
+            // locationBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 40);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(163, 20);
-            this.textBox2.TabIndex = 28;
+            this.locationBox.Location = new System.Drawing.Point(6, 40);
+            this.locationBox.Name = "locationBox";
+            this.locationBox.Size = new System.Drawing.Size(163, 20);
+            this.locationBox.TabIndex = 28;
             // 
-            // comboBox3
+            // endMinute
             // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(374, 79);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(38, 21);
-            this.comboBox3.TabIndex = 27;
+            this.endMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.endMinute.FormattingEnabled = true;
+            this.endMinute.Items.AddRange(new object[] {
+            "00",
+            "15",
+            "30",
+            "45"});
+            this.endMinute.Location = new System.Drawing.Point(403, 79);
+            this.endMinute.MaxDropDownItems = 4;
+            this.endMinute.Name = "endMinute";
+            this.endMinute.Size = new System.Drawing.Size(38, 21);
+            this.endMinute.TabIndex = 27;
+            this.endMinute.SelectedIndexChanged += new System.EventHandler(this.endMinute_SelectedIndexChanged);
             // 
-            // comboBox4
+            // startMinute
             // 
-            this.comboBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(374, 39);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(38, 21);
-            this.comboBox4.TabIndex = 26;
+            this.startMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startMinute.FormattingEnabled = true;
+            this.startMinute.Items.AddRange(new object[] {
+            "00",
+            "15",
+            "30",
+            "45"});
+            this.startMinute.Location = new System.Drawing.Point(403, 39);
+            this.startMinute.MaxDropDownItems = 4;
+            this.startMinute.Name = "startMinute";
+            this.startMinute.Size = new System.Drawing.Size(38, 21);
+            this.startMinute.TabIndex = 26;
+            this.startMinute.SelectedIndexChanged += new System.EventHandler(this.startMinute_SelectedIndexChanged);
             // 
-            // comboBox2
+            // endHour
             // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(330, 79);
-            this.comboBox2.MaxDropDownItems = 24;
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(38, 21);
-            this.comboBox2.TabIndex = 25;
+            this.endHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.endHour.FormattingEnabled = true;
+            this.endHour.Items.AddRange(new object[] {
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17"});
+            this.endHour.Location = new System.Drawing.Point(359, 79);
+            this.endHour.Name = "endHour";
+            this.endHour.Size = new System.Drawing.Size(38, 21);
+            this.endHour.TabIndex = 25;
+            this.endHour.SelectedIndexChanged += new System.EventHandler(this.endHour_SelectedIndexChanged);
             // 
-            // comboBox1
+            // startHour
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(330, 39);
-            this.comboBox1.MaxDropDownItems = 24;
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(38, 21);
-            this.comboBox1.TabIndex = 24;
+            this.startHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startHour.FormattingEnabled = true;
+            this.startHour.Items.AddRange(new object[] {
+            "09",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17"});
+            this.startHour.Location = new System.Drawing.Point(359, 39);
+            this.startHour.Name = "startHour";
+            this.startHour.Size = new System.Drawing.Size(38, 21);
+            this.startHour.TabIndex = 24;
+            this.startHour.SelectedIndexChanged += new System.EventHandler(this.startHour_SelectedIndexChanged);
             // 
-            // dateTimePicker2
+            // endDate
             // 
-            this.dateTimePicker2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(230, 80);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(92, 20);
-            this.dateTimePicker2.TabIndex = 23;
-            this.dateTimePicker2.Value = new System.DateTime(2024, 8, 19, 11, 48, 56, 0);
+            this.endDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.endDate.CustomFormat = "yyyy-MM-dd";
+            this.endDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.endDate.Location = new System.Drawing.Point(259, 80);
+            this.endDate.Name = "endDate";
+            this.endDate.Size = new System.Drawing.Size(92, 20);
+            this.endDate.TabIndex = 23;
+            this.endDate.Value = new System.DateTime(2024, 8, 19, 11, 48, 56, 0);
             // 
-            // dateTimePicker1
+            // startDate
             // 
-            this.dateTimePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(230, 40);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(92, 20);
-            this.dateTimePicker1.TabIndex = 22;
+            this.startDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startDate.CustomFormat = "yyyy-MM-dd";
+            this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startDate.Location = new System.Drawing.Point(259, 40);
+            this.startDate.Name = "startDate";
+            this.startDate.Size = new System.Drawing.Size(92, 20);
+            this.startDate.TabIndex = 22;
             // 
-            // richTextBox1
+            // descriptionBox
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.descriptionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(4, 265);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(408, 103);
-            this.richTextBox1.TabIndex = 21;
-            this.richTextBox1.Text = "";
+            this.descriptionBox.Location = new System.Drawing.Point(4, 265);
+            this.descriptionBox.Name = "descriptionBox";
+            this.descriptionBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.descriptionBox.Size = new System.Drawing.Size(437, 103);
+            this.descriptionBox.TabIndex = 21;
+            this.descriptionBox.Text = "";
             // 
-            // textBox1
+            // titleBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(256, 20);
-            this.textBox1.TabIndex = 20;
+            this.titleBox.Location = new System.Drawing.Point(6, 3);
+            this.titleBox.Name = "titleBox";
+            this.titleBox.Size = new System.Drawing.Size(256, 20);
+            this.titleBox.TabIndex = 20;
             // 
             // submitButton
             // 
             this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.submitButton.Location = new System.Drawing.Point(345, 394);
+            this.submitButton.Location = new System.Drawing.Point(374, 394);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(67, 23);
             this.submitButton.TabIndex = 19;
             this.submitButton.Text = "Schedule";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click_1);
             // 
             // label1
             // 
@@ -290,7 +322,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(371, 142);
+            this.label4.Location = new System.Drawing.Point(400, 142);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 38;
@@ -305,18 +337,57 @@
             this.label5.TabIndex = 39;
             this.label5.Text = "Description";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(483, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.customerGridShort);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Size = new System.Drawing.Size(220, 420);
+            this.splitContainer1.SplitterDistance = 162;
+            this.splitContainer1.TabIndex = 3;
+            // 
+            // customerGridShort
+            // 
+            this.customerGridShort.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customerGridShort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerGridShort.Location = new System.Drawing.Point(0, 0);
+            this.customerGridShort.Name = "customerGridShort";
+            this.customerGridShort.Size = new System.Drawing.Size(220, 162);
+            this.customerGridShort.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(220, 254);
+            this.panel2.TabIndex = 0;
+            // 
             // MeetingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 450);
+            this.ClientSize = new System.Drawing.Size(730, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MeetingForm";
             this.Text = "MeetingForm";
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.customerGridShort)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.customerGridShort)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -324,28 +395,30 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView customerGridShort;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label titleLbl;
         private System.Windows.Forms.Label startLbl;
         private System.Windows.Forms.Label endLabel;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox urlBox;
+        private System.Windows.Forms.TextBox typeBox;
+        private System.Windows.Forms.TextBox contactBox;
+        private System.Windows.Forms.TextBox locationBox;
+        private System.Windows.Forms.ComboBox endMinute;
+        private System.Windows.Forms.ComboBox startMinute;
+        private System.Windows.Forms.ComboBox endHour;
+        private System.Windows.Forms.ComboBox startHour;
+        private System.Windows.Forms.DateTimePicker endDate;
+        private System.Windows.Forms.DateTimePicker startDate;
+        private System.Windows.Forms.RichTextBox descriptionBox;
+        private System.Windows.Forms.TextBox titleBox;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.DataGridView customerGridShort;
+        private System.Windows.Forms.Panel panel2;
     }
 }

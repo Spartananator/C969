@@ -106,6 +106,12 @@ namespace Scheduling_Software
             var filteredList = meetingsList.Where(p => p.Start >= selected && p.End <= monthCalendar1.SelectionEnd).ToList();
             meetingsource.DataSource = filteredList;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MeetingForm meet = new MeetingForm();
+            meet.ShowDialog();
+        }
         //private void
     }
 }

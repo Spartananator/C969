@@ -87,20 +87,20 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(806, 459);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(805, 459);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(558, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(556, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.monthCalendar1);
-            this.splitContainer1.Size = new System.Drawing.Size(245, 453);
+            this.splitContainer1.Size = new System.Drawing.Size(246, 453);
             this.splitContainer1.SplitterDistance = 170;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -125,7 +125,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataViewer);
-            this.splitContainer2.Size = new System.Drawing.Size(462, 453);
+            this.splitContainer2.Size = new System.Drawing.Size(460, 453);
             this.splitContainer2.SplitterDistance = 27;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -139,7 +139,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 27);
+            this.panel1.Size = new System.Drawing.Size(460, 27);
             this.panel1.TabIndex = 0;
             // 
             // button3
@@ -147,7 +147,7 @@
             this.button3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button3.AutoSize = true;
             this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button3.Location = new System.Drawing.Point(407, 2);
+            this.button3.Location = new System.Drawing.Point(405, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(48, 23);
             this.button3.TabIndex = 2;
@@ -159,7 +159,7 @@
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button2.AutoSize = true;
             this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.Location = new System.Drawing.Point(353, 2);
+            this.button2.Location = new System.Drawing.Point(351, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(48, 23);
             this.button2.TabIndex = 1;
@@ -171,12 +171,13 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.AutoSize = true;
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Location = new System.Drawing.Point(311, 2);
+            this.button1.Location = new System.Drawing.Point(309, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(36, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataViewer
             // 
@@ -186,7 +187,7 @@
             this.dataViewer.Location = new System.Drawing.Point(0, 0);
             this.dataViewer.Name = "dataViewer";
             this.dataViewer.SelectedIndex = 0;
-            this.dataViewer.Size = new System.Drawing.Size(462, 422);
+            this.dataViewer.Size = new System.Drawing.Size(460, 422);
             this.dataViewer.TabIndex = 1;
             this.dataViewer.Selected += new System.Windows.Forms.TabControlEventHandler(this.dataViewer_Selected);
             // 
@@ -196,7 +197,7 @@
             this.appointmentTab.Location = new System.Drawing.Point(4, 22);
             this.appointmentTab.Name = "appointmentTab";
             this.appointmentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.appointmentTab.Size = new System.Drawing.Size(454, 396);
+            this.appointmentTab.Size = new System.Drawing.Size(452, 396);
             this.appointmentTab.TabIndex = 0;
             this.appointmentTab.Text = "Appointments";
             this.appointmentTab.UseVisualStyleBackColor = true;
@@ -207,7 +208,7 @@
             this.appointmentGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.appointmentGrid.Location = new System.Drawing.Point(3, 3);
             this.appointmentGrid.Name = "appointmentGrid";
-            this.appointmentGrid.Size = new System.Drawing.Size(448, 390);
+            this.appointmentGrid.Size = new System.Drawing.Size(446, 390);
             this.appointmentGrid.TabIndex = 1;
             // 
             // customerTab
