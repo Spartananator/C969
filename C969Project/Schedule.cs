@@ -15,11 +15,13 @@ using System.Windows.Forms;
 
 namespace Scheduling_Software
 {
+    
     public partial class Schedule : Form
     {
+        Mainscheduler scheduler = new Mainscheduler();
+        user curUser;
         bool success = false;
-        string user = string.Empty;
-        int userID;
+        
         public Schedule()
         {
             InitializeComponent();
@@ -40,8 +42,7 @@ namespace Scheduling_Software
         }
         public void successLogin(string username, int ID)
         {
-            user = username;
-            userID = ID;
+            curUser = new user(username, ID);
             success = true;
             loadApp();
         }
@@ -49,8 +50,8 @@ namespace Scheduling_Software
         public void loadApp()
         {
             //runs once application receives succesful sign in and loads the database data
-            userLabel.Text = "Welcome " + user +$",\nYour user ID is {userID}";
-            Mainscheduler scheduler = new Mainscheduler();
+            userLabel.Text = $"Welcome {curUser.userName},\nYour user ID is {curUser.userID}";
+            
             //MySqlConnection conn = scheduler.getdatabase();
 
             scheduler.InitializeDatabase(this);
@@ -71,14 +72,13 @@ namespace Scheduling_Software
             meetingsource.DataSource = meetingsList;
             customersource.DataSource = customersList;
             customerGrid.AutoGenerateColumns = true;
-            MessageBox.Show(meetings[0].Start.ToString());
             appointmentGrid.DataSource = meetingsource;
             customerGrid.DataSource = customersource;
 
 
             // set visible meetings to today
             DateTime selected = monthCalendar1.SelectionStart;
-            var filteredList = meetingsList.Where(p => p.Start >= selected && p.End <= monthCalendar1.SelectionEnd).ToList();
+            var filteredList = meetingsList.Where(p => p.End >= selected).ToList();
             meetingsource.DataSource = filteredList;
 
             foreach (DataGridViewColumn column in appointmentGrid.Columns)
@@ -89,8 +89,23 @@ namespace Scheduling_Software
                     column.DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
                 }
             }
+            checkAlert();
         }
-
+        private void checkAlert()
+        {
+            foreach (meeting meet in meetingsList)
+            {
+                if (meet.User == curUser.userName)
+                {
+                    
+                    TimeSpan difference = meet.Start - DateTime.Now;
+                    if (difference <= TimeSpan.FromMinutes(15) && difference > TimeSpan.FromSeconds(0))
+                    {
+                        MessageBox.Show($"You have a meeting with {meet.Customer} in {((int)difference.TotalMinutes)} minutes");
+                    }
+                }
+            }
+        }
         private void dataViewer_Selected(object sender, TabControlEventArgs e)
         {
             //sets context depending on selected tab
@@ -103,14 +118,35 @@ namespace Scheduling_Software
         {
             //change visible meetings based on selected day
             DateTime selected = monthCalendar1.SelectionStart;
-            var filteredList = meetingsList.Where(p => p.Start >= selected && p.End <= monthCalendar1.SelectionEnd).ToList();
+            var filteredList = meetingsList.Where(p => p.End >= selected).ToList();
             meetingsource.DataSource = filteredList;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MeetingForm meet = new MeetingForm();
+            MeetingForm meet = new MeetingForm(meetingsList, customersList, curUser, this);
             meet.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = new DataGridViewRow();
+            meeting selectedmeet = (row = this.appointmentGrid.CurrentRow).DataBoundItem as meeting;
+            string deleteapt = "delete from appointment where appointmentId = @id";
+            MySqlConnection conn = scheduler.getdatabase();
+            MySqlCommand comm = scheduler.createQuery(conn, deleteapt);
+
+            comm.Parameters.AddWithValue("@id",selectedmeet.MeetingID);
+
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show("Confirm Deletion", "Alert", buttons);
+            if (result == DialogResult.Yes)
+            {
+                conn.Open();
+                comm.ExecuteNonQuery();
+                conn.Close();
+                scheduler.InitializeDatabase(this);
+            }
         }
         //private void
     }

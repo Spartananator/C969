@@ -98,6 +98,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="customerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customerForm.Designer.cs">
+      <DependentUpon>customerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseController.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -119,6 +125,9 @@
     <Compile Include="Schedule.Designer.cs">
       <DependentUpon>Schedule.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="customerForm.resx">
+      <DependentUpon>customerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

@@ -30,6 +30,11 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.titleLbl = new System.Windows.Forms.Label();
             this.startLbl = new System.Windows.Forms.Label();
             this.endLabel = new System.Windows.Forms.Label();
@@ -46,14 +51,11 @@
             this.descriptionBox = new System.Windows.Forms.RichTextBox();
             this.titleBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.customerGridShort = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.searchBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -61,6 +63,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customerGridShort)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -78,7 +81,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(706, 426);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(660, 426);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -107,8 +110,54 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(444, 420);
+            this.panel1.Size = new System.Drawing.Size(414, 420);
             this.panel1.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 249);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 39;
+            this.label5.Text = "Description";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(370, 142);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 13);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "URL";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 142);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 13);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Meeting Type";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 103);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 36;
+            this.label2.Text = "Contact";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 63);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "Location";
             // 
             // titleLbl
             // 
@@ -123,7 +172,7 @@
             // 
             this.startLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.startLbl.AutoSize = true;
-            this.startLbl.Location = new System.Drawing.Point(400, 63);
+            this.startLbl.Location = new System.Drawing.Point(370, 63);
             this.startLbl.Name = "startLbl";
             this.startLbl.Size = new System.Drawing.Size(29, 13);
             this.startLbl.TabIndex = 33;
@@ -133,7 +182,7 @@
             // 
             this.endLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.endLabel.AutoSize = true;
-            this.endLabel.Location = new System.Drawing.Point(400, 103);
+            this.endLabel.Location = new System.Drawing.Point(370, 103);
             this.endLabel.Name = "endLabel";
             this.endLabel.Size = new System.Drawing.Size(26, 13);
             this.endLabel.TabIndex = 32;
@@ -142,7 +191,7 @@
             // urlBox
             // 
             this.urlBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlBox.Location = new System.Drawing.Point(259, 119);
+            this.urlBox.Location = new System.Drawing.Point(229, 119);
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(182, 20);
             this.urlBox.TabIndex = 31;
@@ -171,13 +220,14 @@
             // endMinute
             // 
             this.endMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.endMinute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.endMinute.FormattingEnabled = true;
             this.endMinute.Items.AddRange(new object[] {
             "00",
             "15",
             "30",
             "45"});
-            this.endMinute.Location = new System.Drawing.Point(403, 79);
+            this.endMinute.Location = new System.Drawing.Point(373, 79);
             this.endMinute.MaxDropDownItems = 4;
             this.endMinute.Name = "endMinute";
             this.endMinute.Size = new System.Drawing.Size(38, 21);
@@ -187,13 +237,14 @@
             // startMinute
             // 
             this.startMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startMinute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startMinute.FormattingEnabled = true;
             this.startMinute.Items.AddRange(new object[] {
             "00",
             "15",
             "30",
             "45"});
-            this.startMinute.Location = new System.Drawing.Point(403, 39);
+            this.startMinute.Location = new System.Drawing.Point(373, 39);
             this.startMinute.MaxDropDownItems = 4;
             this.startMinute.Name = "startMinute";
             this.startMinute.Size = new System.Drawing.Size(38, 21);
@@ -203,6 +254,7 @@
             // endHour
             // 
             this.endHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.endHour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.endHour.FormattingEnabled = true;
             this.endHour.Items.AddRange(new object[] {
             "09",
@@ -214,7 +266,7 @@
             "15",
             "16",
             "17"});
-            this.endHour.Location = new System.Drawing.Point(359, 79);
+            this.endHour.Location = new System.Drawing.Point(329, 79);
             this.endHour.Name = "endHour";
             this.endHour.Size = new System.Drawing.Size(38, 21);
             this.endHour.TabIndex = 25;
@@ -223,6 +275,7 @@
             // startHour
             // 
             this.startHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.startHour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.startHour.FormattingEnabled = true;
             this.startHour.Items.AddRange(new object[] {
             "09",
@@ -234,7 +287,7 @@
             "15",
             "16",
             "17"});
-            this.startHour.Location = new System.Drawing.Point(359, 39);
+            this.startHour.Location = new System.Drawing.Point(329, 39);
             this.startHour.Name = "startHour";
             this.startHour.Size = new System.Drawing.Size(38, 21);
             this.startHour.TabIndex = 24;
@@ -245,21 +298,23 @@
             this.endDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.endDate.CustomFormat = "yyyy-MM-dd";
             this.endDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDate.Location = new System.Drawing.Point(259, 80);
+            this.endDate.Location = new System.Drawing.Point(229, 80);
             this.endDate.Name = "endDate";
             this.endDate.Size = new System.Drawing.Size(92, 20);
             this.endDate.TabIndex = 23;
             this.endDate.Value = new System.DateTime(2024, 8, 19, 11, 48, 56, 0);
+            this.endDate.ValueChanged += new System.EventHandler(this.endDate_ValueChanged);
             // 
             // startDate
             // 
             this.startDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.startDate.CustomFormat = "yyyy-MM-dd";
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(259, 40);
+            this.startDate.Location = new System.Drawing.Point(229, 40);
             this.startDate.Name = "startDate";
             this.startDate.Size = new System.Drawing.Size(92, 20);
             this.startDate.TabIndex = 22;
+            this.startDate.ValueChanged += new System.EventHandler(this.startDate_ValueChanged);
             // 
             // descriptionBox
             // 
@@ -269,7 +324,7 @@
             this.descriptionBox.Location = new System.Drawing.Point(4, 265);
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.descriptionBox.Size = new System.Drawing.Size(437, 103);
+            this.descriptionBox.Size = new System.Drawing.Size(407, 103);
             this.descriptionBox.TabIndex = 21;
             this.descriptionBox.Text = "";
             // 
@@ -283,7 +338,7 @@
             // submitButton
             // 
             this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.submitButton.Location = new System.Drawing.Point(374, 394);
+            this.submitButton.Location = new System.Drawing.Point(344, 394);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(67, 23);
             this.submitButton.TabIndex = 19;
@@ -291,56 +346,10 @@
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click_1);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 35;
-            this.label1.Text = "Location";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "Contact";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 142);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 13);
-            this.label3.TabIndex = 37;
-            this.label3.Text = "Meeting Type";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(400, 142);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 13);
-            this.label4.TabIndex = 38;
-            this.label4.Text = "URL";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 249);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 13);
-            this.label5.TabIndex = 39;
-            this.label5.Text = "Description";
-            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(483, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(453, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -351,33 +360,60 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(220, 420);
+            this.splitContainer1.Size = new System.Drawing.Size(204, 420);
             this.splitContainer1.SplitterDistance = 162;
             this.splitContainer1.TabIndex = 3;
             // 
             // customerGridShort
             // 
+            this.customerGridShort.AllowUserToAddRows = false;
+            this.customerGridShort.AllowUserToDeleteRows = false;
+            this.customerGridShort.AllowUserToResizeRows = false;
             this.customerGridShort.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customerGridShort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerGridShort.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.customerGridShort.Location = new System.Drawing.Point(0, 0);
+            this.customerGridShort.MinimumSize = new System.Drawing.Size(200, 162);
+            this.customerGridShort.MultiSelect = false;
             this.customerGridShort.Name = "customerGridShort";
-            this.customerGridShort.Size = new System.Drawing.Size(220, 162);
+            this.customerGridShort.ReadOnly = true;
+            this.customerGridShort.Size = new System.Drawing.Size(204, 162);
             this.customerGridShort.TabIndex = 1;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.searchBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(220, 254);
+            this.panel2.Size = new System.Drawing.Size(204, 254);
             this.panel2.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 27);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Search Customers";
+            // 
+            // searchBox
+            // 
+            this.searchBox.Location = new System.Drawing.Point(4, 4);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(197, 20);
+            this.searchBox.TabIndex = 0;
+            this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
             // 
             // MeetingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 450);
+            this.ClientSize = new System.Drawing.Size(684, 450);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.MinimumSize = new System.Drawing.Size(700, 489);
             this.Name = "MeetingForm";
             this.Text = "MeetingForm";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -388,6 +424,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customerGridShort)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -420,5 +458,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView customerGridShort;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox searchBox;
     }
 }
