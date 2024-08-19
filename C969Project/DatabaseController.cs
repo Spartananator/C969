@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 namespace C969Project
@@ -15,7 +16,7 @@ namespace C969Project
     partial class Mainscheduler
     {
         string popcustomer = @"
-            select c.customerName, a.address, a.address2, a.postalCode, a.phone, ci.city, co.country 
+            select c.customerName, a.address, a.address2, ci.city, a.postalCode, co.country, a.phone 
             from customer as c
             left join address as a
             ON c.addressId = a.addressId
@@ -48,10 +49,65 @@ namespace C969Project
 
         public void InitializeDatabase(Schedule sched)
         {
-            BindingList<meeting> meetings = new BindingList<meeting>();
-            BindingList<Customer> customers = new BindingList<Customer>();
-            
-            
+            List<meeting> meetings = new List<meeting>();
+            List<Customer> customers = new List<Customer>();
+
+            var conn = getdatabase();
+            var comm = createQuery(conn, popcustomer);
+
+            try
+            {
+                conn.Open();
+            }
+            catch { MessageBox.Show("Error connecting to database"); }
+
+            MySqlDataReader reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                
+                Customer cust = new Customer
+                    (
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                        reader.GetInt16(4),
+                        reader.GetString(5),
+                        reader.GetString(6)
+                    );
+                customers.Add(cust);
+            }
+            conn.Close();
+
+            conn = getdatabase();
+            comm = createQuery(conn, popmeeting);
+
+            try
+            {
+                conn.Open();
+            }
+            catch { MessageBox.Show("Error connecting to database"); }
+
+            reader = comm.ExecuteReader();
+            while (reader.Read())
+            {
+                
+                meeting meet = new meeting
+                    (
+                        reader.GetString(0),
+                        reader.GetString(1),
+                        reader.GetString(2),
+                        reader.GetString(3),
+                        reader.GetString(4),
+                        reader.GetString(5),
+                        reader.GetString(6),
+                        reader.GetString(7),
+                        reader.GetDateTime(8),
+                        reader.GetDateTime(9)
+                    );
+                meetings.Add(meet);
+            }
+            conn.Close();
             sched.setGrids(meetings, customers);
         }
     }
@@ -59,18 +115,18 @@ namespace C969Project
 
     public class meeting
     {
-        Customer Customer;
-        string User;
-        string Title;
-        string Description;
-        string Location;
-        string Contact;
-        string Type;
-        string Url;
-        DateTime Start;
-        DateTime End;
+        public string Customer { get; set; }
+        public string User { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        public string Contact { get; set; }
+        public string Type { get; set; }
+        public string Url { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
 
-        public meeting(Customer customer, string user, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end)
+        public meeting(string customer, string user, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end)
         {
             Customer = customer;
             User = user;
@@ -87,18 +143,19 @@ namespace C969Project
     }
     public class Customer
     {
-        string CustomerName;
-        string Adress;
-        string Adress2;
-        string City;
-        int Zipcode;
-        string Country;
-        string PhoneNumber;
+        public string CustomerName { get; set; }
+        public string Adress { get; set; }
+        public string Adress2 { get; set; }
+        public string City { get; set; }
+        public int Zipcode { get; set; }
+        public string Country { get; set; }
+        public string PhoneNumber { get; set; }
         
         public Customer(string customerName,string adress, string adress2, string city, int zipcode, string country, string phoneNumber)
         {
             CustomerName = customerName;
             Adress = adress;
+            Adress2 = adress2;
             City = city;
             Zipcode = zipcode;
             Country = country;

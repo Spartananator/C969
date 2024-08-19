@@ -36,17 +36,17 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.dataViewer = new System.Windows.Forms.TabControl();
+            this.appointmentTab = new System.Windows.Forms.TabPage();
+            this.appointmentGrid = new System.Windows.Forms.DataGridView();
+            this.customerTab = new System.Windows.Forms.TabPage();
+            this.customerGrid = new System.Windows.Forms.DataGridView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.userLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataViewer = new System.Windows.Forms.TabControl();
-            this.appointmentTab = new System.Windows.Forms.TabPage();
-            this.customerTab = new System.Windows.Forms.TabPage();
-            this.appointmentGrid = new System.Windows.Forms.DataGridView();
-            this.customerGrid = new System.Windows.Forms.DataGridView();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -56,17 +56,17 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.dataViewer.SuspendLayout();
+            this.appointmentTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentGrid)).BeginInit();
+            this.customerTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.dataViewer.SuspendLayout();
-            this.appointmentTab.SuspendLayout();
-            this.customerTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.appointmentGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -87,20 +87,20 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(807, 459);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(806, 459);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(560, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(558, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.monthCalendar1);
-            this.splitContainer1.Size = new System.Drawing.Size(244, 453);
+            this.splitContainer1.Size = new System.Drawing.Size(245, 453);
             this.splitContainer1.SplitterDistance = 170;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -109,6 +109,7 @@
             this.monthCalendar1.Location = new System.Drawing.Point(9, 3);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 0;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // splitContainer2
             // 
@@ -124,7 +125,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataViewer);
-            this.splitContainer2.Size = new System.Drawing.Size(464, 453);
+            this.splitContainer2.Size = new System.Drawing.Size(462, 453);
             this.splitContainer2.SplitterDistance = 27;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -138,7 +139,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(464, 27);
+            this.panel1.Size = new System.Drawing.Size(462, 27);
             this.panel1.TabIndex = 0;
             // 
             // button3
@@ -146,7 +147,7 @@
             this.button3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button3.AutoSize = true;
             this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button3.Location = new System.Drawing.Point(409, 2);
+            this.button3.Location = new System.Drawing.Point(407, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(48, 23);
             this.button3.TabIndex = 2;
@@ -158,7 +159,7 @@
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button2.AutoSize = true;
             this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.Location = new System.Drawing.Point(355, 2);
+            this.button2.Location = new System.Drawing.Point(353, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(48, 23);
             this.button2.TabIndex = 1;
@@ -170,12 +171,65 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.AutoSize = true;
             this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Location = new System.Drawing.Point(313, 2);
+            this.button1.Location = new System.Drawing.Point(311, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(36, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // dataViewer
+            // 
+            this.dataViewer.Controls.Add(this.appointmentTab);
+            this.dataViewer.Controls.Add(this.customerTab);
+            this.dataViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataViewer.Location = new System.Drawing.Point(0, 0);
+            this.dataViewer.Name = "dataViewer";
+            this.dataViewer.SelectedIndex = 0;
+            this.dataViewer.Size = new System.Drawing.Size(462, 422);
+            this.dataViewer.TabIndex = 1;
+            this.dataViewer.Selected += new System.Windows.Forms.TabControlEventHandler(this.dataViewer_Selected);
+            // 
+            // appointmentTab
+            // 
+            this.appointmentTab.Controls.Add(this.appointmentGrid);
+            this.appointmentTab.Location = new System.Drawing.Point(4, 22);
+            this.appointmentTab.Name = "appointmentTab";
+            this.appointmentTab.Padding = new System.Windows.Forms.Padding(3);
+            this.appointmentTab.Size = new System.Drawing.Size(454, 396);
+            this.appointmentTab.TabIndex = 0;
+            this.appointmentTab.Text = "Appointments";
+            this.appointmentTab.UseVisualStyleBackColor = true;
+            // 
+            // appointmentGrid
+            // 
+            this.appointmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.appointmentGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.appointmentGrid.Location = new System.Drawing.Point(3, 3);
+            this.appointmentGrid.Name = "appointmentGrid";
+            this.appointmentGrid.Size = new System.Drawing.Size(448, 390);
+            this.appointmentGrid.TabIndex = 1;
+            // 
+            // customerTab
+            // 
+            this.customerTab.Controls.Add(this.customerGrid);
+            this.customerTab.Location = new System.Drawing.Point(4, 22);
+            this.customerTab.Name = "customerTab";
+            this.customerTab.Padding = new System.Windows.Forms.Padding(3);
+            this.customerTab.Size = new System.Drawing.Size(454, 396);
+            this.customerTab.TabIndex = 1;
+            this.customerTab.Text = "Customer\'s";
+            this.customerTab.UseVisualStyleBackColor = true;
+            // 
+            // customerGrid
+            // 
+            this.customerGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customerGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customerGrid.Location = new System.Drawing.Point(3, 3);
+            this.customerGrid.Name = "customerGrid";
+            this.customerGrid.RowHeadersVisible = false;
+            this.customerGrid.Size = new System.Drawing.Size(448, 390);
+            this.customerGrid.TabIndex = 2;
             // 
             // splitContainer3
             // 
@@ -223,16 +277,6 @@
             this.panel3.Size = new System.Drawing.Size(81, 367);
             this.panel3.TabIndex = 0;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(0, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Past Appts.";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -242,57 +286,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Filters";
             // 
-            // dataViewer
+            // checkBox1
             // 
-            this.dataViewer.Controls.Add(this.appointmentTab);
-            this.dataViewer.Controls.Add(this.customerTab);
-            this.dataViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataViewer.Location = new System.Drawing.Point(0, 0);
-            this.dataViewer.Name = "dataViewer";
-            this.dataViewer.SelectedIndex = 0;
-            this.dataViewer.Size = new System.Drawing.Size(464, 422);
-            this.dataViewer.TabIndex = 1;
-            this.dataViewer.Selected += new System.Windows.Forms.TabControlEventHandler(this.dataViewer_Selected);
-            // 
-            // appointmentTab
-            // 
-            this.appointmentTab.Controls.Add(this.appointmentGrid);
-            this.appointmentTab.Location = new System.Drawing.Point(4, 22);
-            this.appointmentTab.Name = "appointmentTab";
-            this.appointmentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.appointmentTab.Size = new System.Drawing.Size(456, 396);
-            this.appointmentTab.TabIndex = 0;
-            this.appointmentTab.Text = "Appointments";
-            this.appointmentTab.UseVisualStyleBackColor = true;
-            // 
-            // customerTab
-            // 
-            this.customerTab.Controls.Add(this.customerGrid);
-            this.customerTab.Location = new System.Drawing.Point(4, 22);
-            this.customerTab.Name = "customerTab";
-            this.customerTab.Padding = new System.Windows.Forms.Padding(3);
-            this.customerTab.Size = new System.Drawing.Size(456, 396);
-            this.customerTab.TabIndex = 1;
-            this.customerTab.Text = "Customer\'s";
-            this.customerTab.UseVisualStyleBackColor = true;
-            // 
-            // appointmentGrid
-            // 
-            this.appointmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.appointmentGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.appointmentGrid.Location = new System.Drawing.Point(3, 3);
-            this.appointmentGrid.Name = "appointmentGrid";
-            this.appointmentGrid.Size = new System.Drawing.Size(450, 390);
-            this.appointmentGrid.TabIndex = 1;
-            // 
-            // customerGrid
-            // 
-            this.customerGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customerGrid.Location = new System.Drawing.Point(3, 3);
-            this.customerGrid.Name = "customerGrid";
-            this.customerGrid.Size = new System.Drawing.Size(450, 390);
-            this.customerGrid.TabIndex = 2;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(0, 24);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Past Appts.";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // Schedule
             // 
@@ -314,6 +316,11 @@
             this.splitContainer2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.dataViewer.ResumeLayout(false);
+            this.appointmentTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.appointmentGrid)).EndInit();
+            this.customerTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
@@ -322,11 +329,6 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.dataViewer.ResumeLayout(false);
-            this.appointmentTab.ResumeLayout(false);
-            this.customerTab.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.appointmentGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -50,7 +50,7 @@ namespace Scheduling_Software
         {
             userLabel.Text = "Welcome " + user +$",\nYour user ID is {userID}";
             Mainscheduler scheduler = new Mainscheduler();
-            MySqlConnection conn = scheduler.getdatabase();
+            //MySqlConnection conn = scheduler.getdatabase();
 
             scheduler.InitializeDatabase(this);
 
@@ -58,15 +58,29 @@ namespace Scheduling_Software
 
 
         }
-
-        public void setGrids(BindingList<meeting> meetings, BindingList<Customer> customers)
+        BindingSource customersource = new BindingSource();
+        BindingSource meetingsource = new BindingSource();
+        List<meeting> meetingsList;
+        List<Customer> customersList;
+        public void setGrids(List<meeting> meetings, List<Customer> customers)
         {
-            BindingSource meetingsource = new BindingSource();
-            meetingsource.DataSource = meetings;
-            BindingSource customersource = new BindingSource();
-            customersource.DataSource = customers;
+            meetingsList = meetings;
+            customersList = customers;
+            meetingsource.DataSource = meetingsList;
+            customersource.DataSource = customersList;
+            customerGrid.AutoGenerateColumns = true;
+            MessageBox.Show(meetings[0].Start.ToString());
             appointmentGrid.DataSource = meetingsource;
             customerGrid.DataSource = customersource;
+
+            foreach (DataGridViewColumn column in appointmentGrid.Columns)
+            {
+                if (column.DataPropertyName == "Start" || column.DataPropertyName == "End")
+                {
+                    //MessageBox.Show(column.DataPropertyName +" "+ column.HeaderText);
+                    column.DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+                }
+            }
         }
 
         private void dataViewer_Selected(object sender, TabControlEventArgs e)
@@ -75,5 +89,13 @@ namespace Scheduling_Software
             var index = e.TabPageIndex;
             
         }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            DateTime selected = monthCalendar1.SelectionStart;
+            var filteredList = meetingsList.Where(p => p.Start >= selected && p.End <= monthCalendar1.SelectionEnd).ToList();
+            meetingsource.DataSource = filteredList;
+        }
+        //private void
     }
 }
