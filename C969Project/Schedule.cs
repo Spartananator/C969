@@ -48,6 +48,7 @@ namespace Scheduling_Software
 
         public void loadApp()
         {
+            //runs once application receives succesful sign in and loads the database data
             userLabel.Text = "Welcome " + user +$",\nYour user ID is {userID}";
             Mainscheduler scheduler = new Mainscheduler();
             //MySqlConnection conn = scheduler.getdatabase();
@@ -64,6 +65,7 @@ namespace Scheduling_Software
         List<Customer> customersList;
         public void setGrids(List<meeting> meetings, List<Customer> customers)
         {
+            //attach lists to bindingsources, attach binding sources to grids
             meetingsList = meetings;
             customersList = customers;
             meetingsource.DataSource = meetingsList;
@@ -72,6 +74,12 @@ namespace Scheduling_Software
             MessageBox.Show(meetings[0].Start.ToString());
             appointmentGrid.DataSource = meetingsource;
             customerGrid.DataSource = customersource;
+
+
+            // set visible meetings to today
+            DateTime selected = monthCalendar1.SelectionStart;
+            var filteredList = meetingsList.Where(p => p.Start >= selected && p.End <= monthCalendar1.SelectionEnd).ToList();
+            meetingsource.DataSource = filteredList;
 
             foreach (DataGridViewColumn column in appointmentGrid.Columns)
             {
@@ -85,6 +93,7 @@ namespace Scheduling_Software
 
         private void dataViewer_Selected(object sender, TabControlEventArgs e)
         {
+            //sets context depending on selected tab
             var tab = e.TabPage;
             var index = e.TabPageIndex;
             
@@ -92,6 +101,7 @@ namespace Scheduling_Software
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
+            //change visible meetings based on selected day
             DateTime selected = monthCalendar1.SelectionStart;
             var filteredList = meetingsList.Where(p => p.Start >= selected && p.End <= monthCalendar1.SelectionEnd).ToList();
             meetingsource.DataSource = filteredList;
