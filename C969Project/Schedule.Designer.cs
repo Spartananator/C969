@@ -33,9 +33,9 @@
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.modifyButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
             this.dataViewer = new System.Windows.Forms.TabControl();
             this.appointmentTab = new System.Windows.Forms.TabPage();
             this.appointmentGrid = new System.Windows.Forms.DataGridView();
@@ -46,10 +46,13 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.pastBox = new System.Windows.Forms.CheckBox();
+            this.generateReports = new System.Windows.Forms.Button();
+            this.monthBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -87,19 +90,24 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(804, 459);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 459);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(554, 3);
+            this.splitContainer1.Location = new System.Drawing.Point(550, 3);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.monthCalendar1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.monthBox);
+            this.splitContainer1.Panel2.Controls.Add(this.generateReports);
             this.splitContainer1.Size = new System.Drawing.Size(247, 453);
             this.splitContainer1.SplitterDistance = 170;
             this.splitContainer1.TabIndex = 1;
@@ -107,7 +115,9 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(9, 3);
+            this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.ShowTodayCircle = false;
             this.monthCalendar1.TabIndex = 0;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
@@ -125,7 +135,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataViewer);
-            this.splitContainer2.Size = new System.Drawing.Size(459, 453);
+            this.splitContainer2.Size = new System.Drawing.Size(455, 453);
             this.splitContainer2.SplitterDistance = 27;
             this.splitContainer2.TabIndex = 2;
             // 
@@ -133,52 +143,53 @@
             // 
             this.panel1.AutoSize = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.deleteButton);
+            this.panel1.Controls.Add(this.modifyButton);
+            this.panel1.Controls.Add(this.addButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(459, 27);
+            this.panel1.Size = new System.Drawing.Size(455, 27);
             this.panel1.TabIndex = 0;
             // 
-            // button3
+            // deleteButton
             // 
-            this.button3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button3.AutoSize = true;
-            this.button3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button3.Location = new System.Drawing.Point(404, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(48, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.deleteButton.AutoSize = true;
+            this.deleteButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.deleteButton.Location = new System.Drawing.Point(404, 2);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(48, 23);
+            this.deleteButton.TabIndex = 2;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.delete_Click);
             // 
-            // button2
+            // modifyButton
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button2.AutoSize = true;
-            this.button2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button2.Location = new System.Drawing.Point(350, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(48, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Modify";
-            this.button2.UseVisualStyleBackColor = true;
+            this.modifyButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.modifyButton.AutoSize = true;
+            this.modifyButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.modifyButton.Location = new System.Drawing.Point(350, 2);
+            this.modifyButton.Name = "modifyButton";
+            this.modifyButton.Size = new System.Drawing.Size(48, 23);
+            this.modifyButton.TabIndex = 1;
+            this.modifyButton.Text = "Modify";
+            this.modifyButton.UseVisualStyleBackColor = true;
+            this.modifyButton.Click += new System.EventHandler(this.modify_Click);
             // 
-            // button1
+            // addButton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.AutoSize = true;
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.Location = new System.Drawing.Point(308, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addButton.AutoSize = true;
+            this.addButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.addButton.Location = new System.Drawing.Point(308, 2);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(36, 23);
+            this.addButton.TabIndex = 0;
+            this.addButton.Text = "Add";
+            this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.add_Click);
             // 
             // dataViewer
             // 
@@ -188,7 +199,7 @@
             this.dataViewer.Location = new System.Drawing.Point(0, 0);
             this.dataViewer.Name = "dataViewer";
             this.dataViewer.SelectedIndex = 0;
-            this.dataViewer.Size = new System.Drawing.Size(459, 422);
+            this.dataViewer.Size = new System.Drawing.Size(455, 422);
             this.dataViewer.TabIndex = 1;
             this.dataViewer.Selected += new System.Windows.Forms.TabControlEventHandler(this.dataViewer_Selected);
             // 
@@ -198,7 +209,7 @@
             this.appointmentTab.Location = new System.Drawing.Point(4, 22);
             this.appointmentTab.Name = "appointmentTab";
             this.appointmentTab.Padding = new System.Windows.Forms.Padding(3);
-            this.appointmentTab.Size = new System.Drawing.Size(451, 396);
+            this.appointmentTab.Size = new System.Drawing.Size(447, 396);
             this.appointmentTab.TabIndex = 0;
             this.appointmentTab.Text = "Appointments";
             this.appointmentTab.UseVisualStyleBackColor = true;
@@ -209,7 +220,7 @@
             this.appointmentGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.appointmentGrid.Location = new System.Drawing.Point(3, 3);
             this.appointmentGrid.Name = "appointmentGrid";
-            this.appointmentGrid.Size = new System.Drawing.Size(445, 390);
+            this.appointmentGrid.Size = new System.Drawing.Size(441, 390);
             this.appointmentGrid.TabIndex = 1;
             // 
             // customerTab
@@ -272,7 +283,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.checkBox1);
+            this.panel3.Controls.Add(this.pastBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -288,15 +299,38 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Filters";
             // 
-            // checkBox1
+            // pastBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(0, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Past Appts.";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.pastBox.AutoSize = true;
+            this.pastBox.Location = new System.Drawing.Point(0, 24);
+            this.pastBox.Name = "pastBox";
+            this.pastBox.Size = new System.Drawing.Size(80, 17);
+            this.pastBox.TabIndex = 0;
+            this.pastBox.Text = "Past Appts.";
+            this.pastBox.UseVisualStyleBackColor = true;
+            this.pastBox.CheckedChanged += new System.EventHandler(this.pastBox_CheckedChanged);
+            // 
+            // generateReports
+            // 
+            this.generateReports.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.generateReports.Location = new System.Drawing.Point(129, 249);
+            this.generateReports.Name = "generateReports";
+            this.generateReports.Size = new System.Drawing.Size(107, 23);
+            this.generateReports.TabIndex = 2;
+            this.generateReports.Text = "Generate Reports";
+            this.generateReports.UseVisualStyleBackColor = true;
+            this.generateReports.Click += new System.EventHandler(this.generateReports_Click);
+            // 
+            // monthBox
+            // 
+            this.monthBox.AutoSize = true;
+            this.monthBox.Location = new System.Drawing.Point(9, 4);
+            this.monthBox.Name = "monthBox";
+            this.monthBox.Size = new System.Drawing.Size(175, 17);
+            this.monthBox.TabIndex = 3;
+            this.monthBox.Text = "SHOW MONTHLY MEETINGS";
+            this.monthBox.UseVisualStyleBackColor = true;
+            this.monthBox.CheckedChanged += new System.EventHandler(this.monthBox_CheckedChanged);
             // 
             // Schedule
             // 
@@ -309,6 +343,8 @@
             this.Text = "Schedule";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -343,19 +379,21 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button modifyButton;
+        private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label userLabel;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox pastBox;
         private System.Windows.Forms.TabControl dataViewer;
         private System.Windows.Forms.TabPage appointmentTab;
         private System.Windows.Forms.DataGridView appointmentGrid;
         private System.Windows.Forms.TabPage customerTab;
         private System.Windows.Forms.DataGridView customerGrid;
+        private System.Windows.Forms.Button generateReports;
+        private System.Windows.Forms.CheckBox monthBox;
     }
 }

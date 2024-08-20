@@ -14,6 +14,7 @@ using System.Transactions;
 using Google.Protobuf.WellKnownTypes;
 using Scheduling_Software;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities;
 
 namespace C969Project
 {
@@ -26,8 +27,8 @@ namespace C969Project
         Mainscheduler scheduler = new Mainscheduler();
         user curUser;
         Schedule sched;
-
-        public MeetingForm(List<meeting>meets, List<Customer> custs, user User, Schedule s)
+        meeting updateMeet;
+        public MeetingForm(meeting meet, List<meeting>meets, List<Customer> custs, user User, Schedule s)
         {
             meetingsList = meets;
             customersList = custs;
@@ -41,13 +42,46 @@ namespace C969Project
             curUser = User;
             sched = s;
             configureGrid();
-            
+            if (meet != null)
+            {
+                updateMeet = meet;
+                fillFields(meet);
+            }
         }
 
-
+        private void fillFields(meeting meet)
+        {
+            titleBox.Text = meet.Title;
+            locationBox.Text = meet.Location;
+            contactBox.Text = meet.Contact;
+            typeBox.Text = meet.Type;
+            urlBox.Text = meet.Url;
+            descriptionBox.Text = meet.Description;
+            searchBox.Text = meet.Customer;
+        }
         private void submitButton_Click_1(object sender, EventArgs e)
         {
-            DateTime start;
+
+            List<TextBox> boxes = new List<TextBox> { titleBox, typeBox };
+            List<string> fields = new List<string>() { "Meeting Title", "Meeting Type"};
+            bool required = true;
+            string err = "The following fields require input:\n";
+            foreach (TextBox box in boxes)
+            {
+                if (box.Text == "")
+                {
+                    required = false;
+                    err += $" {fields[boxes.IndexOf(box)]}\n";
+                }
+            }
+            if (required == false)
+            {
+
+                MessageBox.Show(err);
+
+            }
+            else 
+            {DateTime start;
             DateTime end;
             string starttime = $"{startDate.Value.Year:D4}-{startDate.Value.Month:D2}-{startDate.Value.Day:D2} {startHour.Text:D2}:{startMinute.Text:D2}:00";
             string endtime = $"{endDate.Value.Year:D4}-{endDate.Value.Month:D2}-{endDate.Value.Day:D2} {endHour.Text:D2}:{endMinute.Text:D2}:00";
@@ -56,117 +90,151 @@ namespace C969Project
 
             bool success = DateTime.TryParseExact(starttime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out start);
 
-            if (success) {
-
-
-                success = DateTime.TryParseExact(endtime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out end);
-                
                 if (success)
                 {
-                    DateTime timestamp = DateTime.UtcNow;
-                    DataGridViewRow row = new DataGridViewRow();
-                    Customer selectedcus = (row = this.customerGridShort.CurrentRow).DataBoundItem as Customer;
-                    int cusid = selectedcus.CustomerID;
-                    int userid = curUser.userID;
-                    string title = titleBox.Text;
-                    string desc = descriptionBox.Text;
-                    string loc = locationBox.Text;
-                    string cont = contactBox.Text;
-                    string type = typeBox.Text;
-                    string url = urlBox.Text;
-                    string startd = start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
-                    string endd = end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
-                    string create = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
-                    string createby = curUser.userName;
-                    string update = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
-                    string updateby = curUser.userName;
 
-                    
-                    
 
-                    string insertMeeting = $@"
+                    success = DateTime.TryParseExact(endtime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out end);
+
+                    if (success)
+                    {
+                        DateTime timestamp = DateTime.UtcNow;
+                        DataGridViewRow row = new DataGridViewRow();
+                        Customer selectedcus = (row = this.customerGridShort.CurrentRow).DataBoundItem as Customer;
+                        int cusid = selectedcus.CustomerID;
+                        int userid = curUser.userID;
+                        string title = titleBox.Text;
+                        string desc = descriptionBox.Text;
+                        string loc = locationBox.Text;
+                        string cont = contactBox.Text;
+                        string type = typeBox.Text;
+                        string url = urlBox.Text;
+                        string startd = start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                        string endd = end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                        string create = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
+                        string createby = curUser.userName;
+                        string update = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
+                        string updateby = curUser.userName;
+
+
+
+
+                        string insertMeeting = @"
                             insert into appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)
                             values (@cusid, @userid, @title, @desc, @loc, @cont, @type, @url, @start, @end, @create, @createby, @update, @updateby)
                         ";
+                        string updateMeeting = @"
+                            update appointment set customerId = @cusid, userId = @userid, title = @title, 
+                    description = @desc, location = @loc, contact = @cont, type = @type, url = @url, start = @start,
+                    end = @end, lastUpdate = @update, lastUpdateBy = @updateby where appointmentId = @appid;";
 
-                    
-                    
 
-                    MySqlConnection conn = scheduler.getdatabase();
-                    MySqlCommand comm = scheduler.createQuery(conn, insertMeeting);
 
-                    comm.Parameters.AddWithValue("@cusid", cusid);
-                    comm.Parameters.AddWithValue("@userid", userid);
-                    comm.Parameters.AddWithValue("@title", title);
-                    comm.Parameters.AddWithValue("@desc", desc);
-                    comm.Parameters.AddWithValue("@loc", loc);
-                    comm.Parameters.AddWithValue("@cont", cont);
-                    comm.Parameters.AddWithValue("type", type);
-                    comm.Parameters.AddWithValue("@url", url);
-                    comm.Parameters.AddWithValue("@start", startd);
-                    comm.Parameters.AddWithValue("@end", endd);
-                    comm.Parameters.AddWithValue("@create", create);
-                    comm.Parameters.AddWithValue("@createby", createby);
-                    comm.Parameters.AddWithValue("@update", update);
-                    comm.Parameters.AddWithValue("@updateby", updateby);
 
-                    bool secure = true;
-                    foreach (meeting meet in meetingsList)
-                    {
-                        if (start < meet.Start || start > meet.End)
+
+                        MySqlConnection conn = scheduler.getdatabase();
+                        MySqlCommand comm;
+                        if (updateMeet == null)
                         {
-                            if (end < meet.Start || end > meet.End)
+                            comm = scheduler.createQuery(conn, insertMeeting);
+
+                            comm.Parameters.AddWithValue("@cusid", cusid);
+                            comm.Parameters.AddWithValue("@userid", userid);
+                            comm.Parameters.AddWithValue("@title", title);
+                            comm.Parameters.AddWithValue("@desc", desc);
+                            comm.Parameters.AddWithValue("@loc", loc);
+                            comm.Parameters.AddWithValue("@cont", cont);
+                            comm.Parameters.AddWithValue("type", type);
+                            comm.Parameters.AddWithValue("@url", url);
+                            comm.Parameters.AddWithValue("@start", startd);
+                            comm.Parameters.AddWithValue("@end", endd);
+                            comm.Parameters.AddWithValue("@create", create);
+                            comm.Parameters.AddWithValue("@createby", createby);
+                            comm.Parameters.AddWithValue("@update", update);
+                            comm.Parameters.AddWithValue("@updateby", updateby);
+                        }
+                        else
+                        {
+                            comm = scheduler.createQuery(conn, updateMeeting);
+
+                            comm.Parameters.AddWithValue("@cusid", cusid);
+                            comm.Parameters.AddWithValue("@userid", userid);
+                            comm.Parameters.AddWithValue("@title", title);
+                            comm.Parameters.AddWithValue("@desc", desc);
+                            comm.Parameters.AddWithValue("@loc", loc);
+                            comm.Parameters.AddWithValue("@cont", cont);
+                            comm.Parameters.AddWithValue("type", type);
+                            comm.Parameters.AddWithValue("@url", url);
+                            comm.Parameters.AddWithValue("@start", startd);
+                            comm.Parameters.AddWithValue("@end", endd);
+
+                            comm.Parameters.AddWithValue("@update", update);
+                            comm.Parameters.AddWithValue("@updateby", updateby);
+                            comm.Parameters.AddWithValue("@appid", updateMeet.MeetingID);
+                        }
+
+
+
+                        bool secure = true;
+                        foreach (meeting meet in meetingsList)
+                        {
+                            if (updateMeet != null)
+                            { if (meet.MeetingID == updateMeet.MeetingID) { continue; } }
+                            if (start < meet.Start || start > meet.End)
                             {
-                                if (meet.Start > start && meet.Start < end)
+                                if (end < meet.Start || end > meet.End)
+                                {
+                                    if (meet.Start > start && meet.Start < end)
+                                    {
+                                        secure = false;
+                                        MessageBox.Show($"Unable to schedule this meeting at the same time as the meeting with {meet.Customer} \n This meeting is from {meet.Start} to {meet.End}");
+                                    }
+                                    else { if (end == start) { secure = false; MessageBox.Show("Cannot have a meeting with the same start and end time."); } }
+
+                                }
+                                else
                                 {
                                     secure = false;
                                     MessageBox.Show($"Unable to schedule this meeting at the same time as the meeting with {meet.Customer} \n This meeting is from {meet.Start} to {meet.End}");
                                 }
-                                else { if (end == start) { secure = false; MessageBox.Show("Cannot have a meeting with the same start and end time."); } }
-                                
                             }
                             else
                             {
                                 secure = false;
                                 MessageBox.Show($"Unable to schedule this meeting at the same time as the meeting with {meet.Customer} \n This meeting is from {meet.Start} to {meet.End}");
                             }
-                        }
-                        else
-                        {
-                            secure = false;
-                            MessageBox.Show($"Unable to schedule this meeting at the same time as the meeting with {meet.Customer} \n This meeting is from {meet.Start} to {meet.End}");
+
                         }
 
+                        {
+                            try
+                            {
+                                conn.Open();
+                            }
+                            catch { MessageBox.Show("Error connecting to database"); }
+                            if (secure == true)
+                            {
+                                comm.ExecuteNonQuery();
+
+
+
+                                scheduler.InitializeDatabase(sched);
+                                this.Close();
+                            }
+                            conn.Close();
+                        }
+                        //MessageBox.Show(start.ToString() + end.ToString());
+
                     }
-                    
+                    else
                     {
-                        try
-                        {
-                            conn.Open();
-                        }
-                        catch { MessageBox.Show("Error connecting to database"); }
-                        if (secure == true)
-                        {
-                            comm.ExecuteNonQuery();
-
-                            
-
-                            scheduler.InitializeDatabase(sched);
-                            this.Close();
-                        }
-                        conn.Close();
+                        MessageBox.Show("Please confirm end date and time is set.");
                     }
-                    //MessageBox.Show(start.ToString() + end.ToString());
-
                 }
                 else
                 {
-                    MessageBox.Show("Please confirm end date and time is set.");
+                    MessageBox.Show("Please confirm start date and time is set.");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please confirm start date and time is set.");
             }
         }
 
@@ -273,24 +341,35 @@ namespace C969Project
             }
         }
 
-        private void startHour_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        
-        }
-
-        private void startMinute_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void endHour_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void endMinute_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            if(endHour.Text == "09")
+            {
+                endMinute.Items.Clear();
+                List<string> minuteOptionsSmall = new List<string>() {"15", "30", "45" };
+                foreach (string option in minuteOptionsSmall)
+                {
+                    endMinute.Items.Add(option);
+                }
+            }
+            else if(endHour.Text == "17")
+            {
+                endMinute.Items.Clear();
+                List<string> minuteOptionsSmall = new List<string>() { "00"};
+                foreach (string option in minuteOptionsSmall)
+                {
+                    endMinute.Items.Add(option);
+                }
+            }else
+            {
+                endMinute.Items.Clear();
+                List<string> minuteOptionsSmall = new List<string>() {"00", "15", "30", "45" };
+                foreach (string option in minuteOptionsSmall)
+                {
+                    endMinute.Items.Add(option);
+                }
+               
+            }
         }
     }
 }

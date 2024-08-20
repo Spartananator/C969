@@ -30,7 +30,6 @@
         {
             this.activeBox = new System.Windows.Forms.CheckBox();
             this.submitButton = new System.Windows.Forms.Button();
-            this.phoneBox = new System.Windows.Forms.MaskedTextBox();
             this.addressBox = new System.Windows.Forms.TextBox();
             this.customernameBox = new System.Windows.Forms.TextBox();
             this.address2Box = new System.Windows.Forms.TextBox();
@@ -44,6 +43,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.phoneBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // activeBox
@@ -65,14 +65,6 @@
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
-            // 
-            // phoneBox
-            // 
-            this.phoneBox.Location = new System.Drawing.Point(13, 294);
-            this.phoneBox.Mask = "0-000-000-0000";
-            this.phoneBox.Name = "phoneBox";
-            this.phoneBox.Size = new System.Drawing.Size(82, 20);
-            this.phoneBox.TabIndex = 2;
             // 
             // addressBox
             // 
@@ -179,11 +171,20 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Phone Number";
             // 
+            // phoneBox
+            // 
+            this.phoneBox.Location = new System.Drawing.Point(12, 294);
+            this.phoneBox.Name = "phoneBox";
+            this.phoneBox.Size = new System.Drawing.Size(125, 20);
+            this.phoneBox.TabIndex = 16;
+            this.phoneBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.phoneBox_KeyPress);
+            // 
             // customerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 412);
+            this.Controls.Add(this.phoneBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -197,7 +198,6 @@
             this.Controls.Add(this.address2Box);
             this.Controls.Add(this.customernameBox);
             this.Controls.Add(this.addressBox);
-            this.Controls.Add(this.phoneBox);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.activeBox);
             this.MaximumSize = new System.Drawing.Size(400, 451);
@@ -213,7 +213,6 @@
 
         private System.Windows.Forms.CheckBox activeBox;
         private System.Windows.Forms.Button submitButton;
-        private System.Windows.Forms.MaskedTextBox phoneBox;
         private System.Windows.Forms.TextBox addressBox;
         private System.Windows.Forms.TextBox customernameBox;
         private System.Windows.Forms.TextBox address2Box;
@@ -227,5 +226,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox phoneBox;
     }
 }

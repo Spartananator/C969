@@ -17,7 +17,7 @@ namespace C969Project
     partial class Mainscheduler
     {
         string popcustomer = @"
-            select c.customerId, c.customerName, a.address, a.address2, ci.city, a.postalCode, co.country, a.phone 
+            select c.customerId, c.customerName, a.address, a.address2, ci.city, a.postalCode, co.country, a.phone, a.addressId, ci.cityId, co.countryId
             from customer as c
             left join address as a
             ON c.addressId = a.addressId
@@ -73,10 +73,13 @@ namespace C969Project
                         reader.GetString(2),
                         reader.GetString(3),
                         reader.GetString(4),
-                        reader.GetInt16(5),
+                        reader.GetInt32(5),
                         reader.GetString(6),
-                        reader.GetString(7)
-                        
+                        reader.GetString(7),
+                        reader.GetInt16(8),
+                        reader.GetInt16(9),
+                        reader.GetInt16(10)
+
                     );
                 customers.Add(cust);
             }
@@ -160,8 +163,11 @@ namespace C969Project
         public int Zipcode { get; set; }
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
+        private int AddressID { get; set; }
+        private int CityID { get; set; }
+        private int CountryID { get; set; }
         
-        public Customer(int customerid, string customerName,string adress, string adress2, string city, int zipcode, string country, string phoneNumber)
+        public Customer(int customerid, string customerName,string adress, string adress2, string city, int zipcode, string country, string phoneNumber, int addressid, int cityid, int countryid)
         {
             CustomerID = customerid;
             CustomerName = customerName;
@@ -171,7 +177,15 @@ namespace C969Project
             Zipcode = zipcode;
             Country = country;
             PhoneNumber = phoneNumber;
+            AddressID = addressid;
+            CityID = cityid;
+            CountryID = countryid;
 
+        }
+        public List<int> getKeys()
+        {
+            List<int> keys = new List<int> { CustomerID, AddressID, CityID, CountryID };
+            return keys;
         }
     }
     

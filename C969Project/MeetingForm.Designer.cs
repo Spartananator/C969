@@ -232,7 +232,6 @@
             this.endMinute.Name = "endMinute";
             this.endMinute.Size = new System.Drawing.Size(38, 21);
             this.endMinute.TabIndex = 27;
-            this.endMinute.SelectedIndexChanged += new System.EventHandler(this.endMinute_SelectedIndexChanged);
             // 
             // startMinute
             // 
@@ -249,7 +248,6 @@
             this.startMinute.Name = "startMinute";
             this.startMinute.Size = new System.Drawing.Size(38, 21);
             this.startMinute.TabIndex = 26;
-            this.startMinute.SelectedIndexChanged += new System.EventHandler(this.startMinute_SelectedIndexChanged);
             // 
             // endHour
             // 
@@ -285,13 +283,11 @@
             "13",
             "14",
             "15",
-            "16",
-            "17"});
+            "16"});
             this.startHour.Location = new System.Drawing.Point(329, 39);
             this.startHour.Name = "startHour";
             this.startHour.Size = new System.Drawing.Size(38, 21);
             this.startHour.TabIndex = 24;
-            this.startHour.SelectedIndexChanged += new System.EventHandler(this.startHour_SelectedIndexChanged);
             // 
             // endDate
             // 
