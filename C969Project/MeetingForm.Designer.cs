@@ -192,6 +192,7 @@
             // 
             this.urlBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.urlBox.Location = new System.Drawing.Point(229, 119);
+            this.urlBox.MaxLength = 255;
             this.urlBox.Name = "urlBox";
             this.urlBox.Size = new System.Drawing.Size(182, 20);
             this.urlBox.TabIndex = 31;
@@ -248,6 +249,7 @@
             this.startMinute.Name = "startMinute";
             this.startMinute.Size = new System.Drawing.Size(38, 21);
             this.startMinute.TabIndex = 26;
+            this.startMinute.SelectionChangeCommitted += new System.EventHandler(this.startMinute_SelectionChangeCommitted);
             // 
             // endHour
             // 
@@ -268,7 +270,7 @@
             this.endHour.Name = "endHour";
             this.endHour.Size = new System.Drawing.Size(38, 21);
             this.endHour.TabIndex = 25;
-            this.endHour.SelectedIndexChanged += new System.EventHandler(this.endHour_SelectedIndexChanged);
+            this.endHour.SelectionChangeCommitted += new System.EventHandler(this.endHour_SelectionChangeCommitted);
             // 
             // startHour
             // 
@@ -288,6 +290,7 @@
             this.startHour.Name = "startHour";
             this.startHour.Size = new System.Drawing.Size(38, 21);
             this.startHour.TabIndex = 24;
+            this.startHour.SelectionChangeCommitted += new System.EventHandler(this.startHour_SelectionChangeCommitted);
             // 
             // endDate
             // 
@@ -327,6 +330,7 @@
             // titleBox
             // 
             this.titleBox.Location = new System.Drawing.Point(6, 3);
+            this.titleBox.MaxLength = 255;
             this.titleBox.Name = "titleBox";
             this.titleBox.Size = new System.Drawing.Size(256, 20);
             this.titleBox.TabIndex = 20;

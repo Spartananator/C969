@@ -69,6 +69,7 @@
             // addressBox
             // 
             this.addressBox.Location = new System.Drawing.Point(13, 91);
+            this.addressBox.MaxLength = 50;
             this.addressBox.Name = "addressBox";
             this.addressBox.Size = new System.Drawing.Size(274, 20);
             this.addressBox.TabIndex = 3;
@@ -76,6 +77,7 @@
             // customernameBox
             // 
             this.customernameBox.Location = new System.Drawing.Point(13, 53);
+            this.customernameBox.MaxLength = 45;
             this.customernameBox.Name = "customernameBox";
             this.customernameBox.Size = new System.Drawing.Size(274, 20);
             this.customernameBox.TabIndex = 4;
@@ -83,6 +85,7 @@
             // address2Box
             // 
             this.address2Box.Location = new System.Drawing.Point(12, 128);
+            this.address2Box.MaxLength = 50;
             this.address2Box.Name = "address2Box";
             this.address2Box.Size = new System.Drawing.Size(274, 20);
             this.address2Box.TabIndex = 5;
@@ -90,6 +93,7 @@
             // cityBox
             // 
             this.cityBox.Location = new System.Drawing.Point(13, 168);
+            this.cityBox.MaxLength = 50;
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(274, 20);
             this.cityBox.TabIndex = 6;
@@ -97,6 +101,7 @@
             // countryBox
             // 
             this.countryBox.Location = new System.Drawing.Point(12, 255);
+            this.countryBox.MaxLength = 50;
             this.countryBox.Name = "countryBox";
             this.countryBox.Size = new System.Drawing.Size(274, 20);
             this.countryBox.TabIndex = 7;
@@ -104,9 +109,11 @@
             // zipcodeBox
             // 
             this.zipcodeBox.Location = new System.Drawing.Point(12, 209);
+            this.zipcodeBox.MaxLength = 10;
             this.zipcodeBox.Name = "zipcodeBox";
-            this.zipcodeBox.Size = new System.Drawing.Size(274, 20);
+            this.zipcodeBox.Size = new System.Drawing.Size(125, 20);
             this.zipcodeBox.TabIndex = 8;
+            this.zipcodeBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.zipcodeBox_KeyPress);
             // 
             // label1
             // 
@@ -174,6 +181,7 @@
             // phoneBox
             // 
             this.phoneBox.Location = new System.Drawing.Point(12, 294);
+            this.phoneBox.MaxLength = 20;
             this.phoneBox.Name = "phoneBox";
             this.phoneBox.Size = new System.Drawing.Size(125, 20);
             this.phoneBox.TabIndex = 16;

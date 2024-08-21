@@ -20,6 +20,9 @@ namespace C969Project
 {
     public partial class MeetingForm : Form
     {
+        List<string> hours = new List<string> { "09", "10", "11", "12", "13", "14", "15", "16", "17" };
+        List<string> minutes = new List<string> { "00", "15", "30","45"};
+
         DayOfWeek[] InvalidDay = { DayOfWeek.Saturday, DayOfWeek.Sunday };
         List<meeting> meetingsList;
         List<Customer> customersList;
@@ -33,12 +36,9 @@ namespace C969Project
             meetingsList = meets;
             customersList = custs;
             InitializeComponent();
-            startHour.Text = "09";
-            startMinute.Text = "00";
-            endHour.Text = "09";
-            endMinute.Text = "00";
-            startDate.MinDate = DateTime.Now;
-            endDate.MinDate = DateTime.Now;
+            
+            startDate.MinDate = DateTime.Now.Date;
+            endDate.MinDate = DateTime.Now.Date;
             curUser = User;
             sched = s;
             configureGrid();
@@ -46,6 +46,14 @@ namespace C969Project
             {
                 updateMeet = meet;
                 fillFields(meet);
+            }
+            else
+            {
+                endHour.Text = "09";
+                endMinute.Text = "15";
+                startHour.Text = "09";
+                startMinute.Text = "00";
+                
             }
         }
 
@@ -58,6 +66,14 @@ namespace C969Project
             urlBox.Text = meet.Url;
             descriptionBox.Text = meet.Description;
             searchBox.Text = meet.Customer;
+            startDate.Value = meet.Start; 
+            endDate.Value = meet.End;
+            endMinute.Text = meet.End.ToString("mm");
+            endHour.Text = meet.End.ToString("HH");                       
+            startHour.Text = meet.Start.ToString("HH");            
+            startMinute.Text = meet.Start.ToString("mm");
+            checkEndBox();
+            checkStartBox();
         }
         private void submitButton_Click_1(object sender, EventArgs e)
         {
@@ -101,7 +117,7 @@ namespace C969Project
                         DateTime timestamp = DateTime.UtcNow;
                         DataGridViewRow row = new DataGridViewRow();
                         Customer selectedcus = (row = this.customerGridShort.CurrentRow).DataBoundItem as Customer;
-                        int cusid = selectedcus.CustomerID;
+                        int cusid = selectedcus.getKey();
                         int userid = curUser.userID;
                         string title = titleBox.Text;
                         string desc = descriptionBox.Text;
@@ -170,7 +186,7 @@ namespace C969Project
 
                             comm.Parameters.AddWithValue("@update", update);
                             comm.Parameters.AddWithValue("@updateby", updateby);
-                            comm.Parameters.AddWithValue("@appid", updateMeet.MeetingID);
+                            comm.Parameters.AddWithValue("@appid", updateMeet.getKey());
                         }
 
 
@@ -179,7 +195,7 @@ namespace C969Project
                         foreach (meeting meet in meetingsList)
                         {
                             if (updateMeet != null)
-                            { if (meet.MeetingID == updateMeet.MeetingID) { continue; } }
+                            { if (meet.getKey() == updateMeet.getKey()) { continue; } }
                             if (start < meet.Start || start > meet.End)
                             {
                                 if (end < meet.Start || end > meet.End)
@@ -321,7 +337,7 @@ namespace C969Project
         {
             try
             {
-                int zip = int.Parse(searchBox.Text);
+                var zip = searchBox.Text;
 
                 var filteredList = customersList.Where(p => p.Zipcode == zip).ToList();
                 customers.DataSource = filteredList;
@@ -341,35 +357,118 @@ namespace C969Project
             }
         }
 
-        private void endHour_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void checkEndBox()
         {
-            if(endHour.Text == "09")
+            if (endHour.Text == startHour.Text && startMinute.Text == "45")
             {
+                
+                
                 endMinute.Items.Clear();
-                List<string> minuteOptionsSmall = new List<string>() {"15", "30", "45" };
-                foreach (string option in minuteOptionsSmall)
+                foreach (string min in minutes)
                 {
-                    endMinute.Items.Add(option);
+                    endHour.Items.Add(min);
+                }
+                
+                endMinute.Text = minutes[0];
+                
+            }
+            else if (endHour.Text == startHour.Text)
+            {
+
+                var holder = endMinute.Text;
+                var sorted = minutes.Where(p => int.Parse(p) > int.Parse(startMinute.Text)).ToList();
+                endMinute.Items.Clear();
+                foreach (string min in sorted)
+                {
+                    endMinute.Items.Add(min);
+                }
+                if (int.Parse(holder) < int.Parse(startMinute.Text))
+                {
+                    endMinute.Text = sorted[0];
+                }
+                else
+                {
+                    endMinute.Text = holder;
                 }
             }
-            else if(endHour.Text == "17")
+            else if (endHour.Text == "17")
             {
                 endMinute.Items.Clear();
-                List<string> minuteOptionsSmall = new List<string>() { "00"};
-                foreach (string option in minuteOptionsSmall)
-                {
-                    endMinute.Items.Add(option);
-                }
-            }else
-            {
-                endMinute.Items.Clear();
-                List<string> minuteOptionsSmall = new List<string>() {"00", "15", "30", "45" };
-                foreach (string option in minuteOptionsSmall)
-                {
-                    endMinute.Items.Add(option);
-                }
-               
+                endMinute.Items.Add("00");
+                endMinute.Text = "00";
             }
+            else
+            {
+                endMinute.Items.Clear();
+                foreach (string min in minutes)
+                {
+                    endMinute.Items.Add(min);
+                }
+                endMinute.Text = minutes[0];
+            }
+        }
+        private void checkStartBox()
+        {
+
+            if(startMinute.Text == "45")
+            {
+                var holder = endHour.Text;
+                var sorted = hours.Where(p => int.Parse(p) > int.Parse(startHour.Text)).ToList();
+                endHour.Items.Clear();
+                foreach (string hour in sorted)
+                {
+                    endHour.Items.Add(hour);
+                }
+                if(int.Parse(holder) < int.Parse(sorted[0]))
+                {
+                    endHour.Text = sorted[0];
+                }
+                else
+                {
+                    endHour.Text = holder;
+                }
+            }
+            else
+            { 
+                
+                var holder = endHour.Text;
+                var sorted = hours.Where(p => int.Parse(p) >= int.Parse(startHour.Text)).ToList();
+                endHour.Items.Clear();
+                foreach (string hour in sorted)
+                {
+                    endHour.Items.Add(hour);
+                }
+                if (int.Parse(holder) <= int.Parse(sorted[0]))
+                {
+                    endHour.Text = sorted[0];
+                }
+                else
+                {
+                    endHour.Text = holder;
+                }
+
+            }
+        }
+
+        private void startHour_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            checkStartBox();
+            checkEndBox();
+        }
+
+        private void startMinute_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            checkStartBox();
+            checkEndBox();
+        }
+
+        private void endHour_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            
+            checkStartBox();
+            checkEndBox();
         }
     }
 }

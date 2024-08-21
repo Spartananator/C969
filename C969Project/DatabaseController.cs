@@ -3,6 +3,7 @@ using Scheduling_Software;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Configuration;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,7 @@ namespace C969Project
     partial class Mainscheduler
     {
         string popcustomer = @"
-            select c.customerId, c.customerName, a.address, a.address2, ci.city, a.postalCode, co.country, a.phone, a.addressId, ci.cityId, co.countryId
+            select c.customerId, c.customerName, a.address, a.address2, ci.city, a.postalCode, co.country, a.phone, a.addressId, ci.cityId, co.countryId, c.active
             from customer as c
             left join address as a
             ON c.addressId = a.addressId
@@ -65,7 +66,7 @@ namespace C969Project
             MySqlDataReader reader = comm.ExecuteReader();
             while (reader.Read())
             {
-                
+
                 Customer cust = new Customer
                     (
                         reader.GetInt16(0),
@@ -73,12 +74,13 @@ namespace C969Project
                         reader.GetString(2),
                         reader.GetString(3),
                         reader.GetString(4),
-                        reader.GetInt32(5),
+                        reader.GetString(5),
                         reader.GetString(6),
                         reader.GetString(7),
                         reader.GetInt16(8),
                         reader.GetInt16(9),
-                        reader.GetInt16(10)
+                        reader.GetInt16(10),
+                        (reader.GetInt16(11) == 1)
 
                     );
                 customers.Add(cust);
@@ -123,7 +125,7 @@ namespace C969Project
 
     public class meeting
     {
-        public int MeetingID { get; set; }
+        private int MeetingID { get; set; }
         private int CustomerID { get;  set; }
         public string Customer { get; set; }
         public string User { get; set; }
@@ -152,22 +154,27 @@ namespace C969Project
             End = end.ToLocalTime();
 
         }
+        public int getKey()
+        {
+            return MeetingID;
+        }
     }
     public class Customer
     {
-        public int CustomerID { get; set; }
+        private int CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string Adress { get; set; }
         public string Adress2 { get; set; }
         public string City { get; set; }
-        public int Zipcode { get; set; }
+        public string Zipcode { get; set; }
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
         private int AddressID { get; set; }
         private int CityID { get; set; }
         private int CountryID { get; set; }
+        public bool Active { get; set; }
         
-        public Customer(int customerid, string customerName,string adress, string adress2, string city, int zipcode, string country, string phoneNumber, int addressid, int cityid, int countryid)
+        public Customer(int customerid, string customerName,string adress, string adress2, string city, string zipcode, string country, string phoneNumber, int addressid, int cityid, int countryid, bool active)
         {
             CustomerID = customerid;
             CustomerName = customerName;
@@ -180,12 +187,17 @@ namespace C969Project
             AddressID = addressid;
             CityID = cityid;
             CountryID = countryid;
+            Active = active;
 
         }
         public List<int> getKeys()
         {
             List<int> keys = new List<int> { CustomerID, AddressID, CityID, CountryID };
             return keys;
+        }
+        public int getKey()
+        {
+            return CustomerID;
         }
     }
     

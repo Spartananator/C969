@@ -36,9 +36,10 @@ namespace C969Project
             addressBox.Text = cust.Adress;
             address2Box.Text = cust.Adress2;
             cityBox.Text = cust.City;
-            zipcodeBox.Text = cust.Zipcode.ToString();
+            zipcodeBox.Text = cust.Zipcode;
             phoneBox.Text = cust.PhoneNumber;
             countryBox.Text = cust.Country;
+            activeBox.Checked = cust.Active;
 
 
         }
@@ -231,6 +232,25 @@ update customer set customerName = @name, active = @active, lastUpdate = @update
             }
 
             
+            e.Handled = true;
+        }
+
+        
+
+        private void zipcodeBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '-')
+            {
+                return;
+            }
+
+
             e.Handled = true;
         }
     }

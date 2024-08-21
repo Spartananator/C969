@@ -15,14 +15,14 @@ using System.Windows.Forms;
 
 namespace Scheduling_Software
 {
-    
+
     public partial class Schedule : Form
     {
         Mainscheduler scheduler = new Mainscheduler();
         user curUser;
         bool success = false;
         int index;
-        
+
         public Schedule()
         {
             InitializeComponent();
@@ -39,7 +39,7 @@ namespace Scheduling_Software
             {
                 login.ShowDialog();
             }
-           
+
         }
         public void successLogin(string username, int ID)
         {
@@ -52,7 +52,7 @@ namespace Scheduling_Software
         {
             //runs once application receives succesful sign in and loads the database data
             userLabel.Text = $"Welcome {curUser.userName},\nYour user ID is {curUser.userID}";
-            
+
             //MySqlConnection conn = scheduler.getdatabase();
 
             scheduler.InitializeDatabase(this);
@@ -65,7 +65,7 @@ namespace Scheduling_Software
         BindingSource meetingsource = new BindingSource();
         List<meeting> meetingsList;
         List<Customer> customersList;
-        
+
         public void setGrids(List<meeting> meetings, List<Customer> customers)
         {
             //attach lists to bindingsources, attach binding sources to grids
@@ -99,7 +99,7 @@ namespace Scheduling_Software
             {
                 if (meet.User == curUser.userName)
                 {
-                    
+
                     TimeSpan difference = meet.Start - DateTime.Now;
                     if (difference <= TimeSpan.FromMinutes(15) && difference > TimeSpan.FromSeconds(0))
                     {
@@ -111,10 +111,10 @@ namespace Scheduling_Software
         private void dataViewer_Selected(object sender, TabControlEventArgs e)
         {
             //sets context depending on selected tab
-            
+
             index = e.TabPageIndex;
 
-            
+
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -127,8 +127,8 @@ namespace Scheduling_Software
                 meetingsource.DataSource = filteredList;
             }
             else
-            { 
-                if(pastBox.Checked == true)
+            {
+                if (pastBox.Checked == true)
                 {
                     var filteredList = meetingsList.Where(p => p.Start.Day == selected.Day).ToList();
                     meetingsource.DataSource = filteredList;
@@ -138,9 +138,9 @@ namespace Scheduling_Software
                     var filteredList = meetingsList.Where(p => p.Start.Day == selected.Day && p.End >= DateTime.Now).ToList();
                     meetingsource.DataSource = filteredList;
                 }
-                
+
             }
-            
+
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -153,7 +153,7 @@ namespace Scheduling_Software
             }
             else if (index == 1)
             {
-                //DataGridViewRow row = new DataGridViewRow();
+                
                 Customer customer = null;
                 customerForm cust = new customerForm(customer, curUser, this);
                 cust.ShowDialog();
@@ -162,104 +162,170 @@ namespace Scheduling_Software
 
         private void delete_Click(object sender, EventArgs e)
         {
+            if (index == 0)
+            {
+                meeting meet = (appointmentGrid.CurrentRow.DataBoundItem) as meeting;
+                string deletecom = "delete from appointment where appointmentId = @appid;";
+                var conn = scheduler.getdatabase();
+                var comm = scheduler.createQuery(conn, deletecom);
 
+                comm.Parameters.AddWithValue("@appid", meet.getKey());
+
+                try
+                {
+                    conn.Open();
+                    comm.ExecuteNonQuery();
+                    conn.Close();
+                    scheduler.InitializeDatabase(this);
+                }
+                catch
+                {
+                    MessageBox.Show("Could not connect to database!");
+                }
+            }
+            else if (index == 1)
+            {
+                Customer cust = (customerGrid.CurrentRow.DataBoundItem) as Customer;
+                string deletecom = "delete from customer where customerId = @cusid; delete from address where addressId = @addressid; delete from city where cityId = @cityid; delete from country where countryId = @countryId;";
+                var conn = scheduler.getdatabase();
+                var comm = scheduler.createQuery(conn, deletecom);
+                comm.Parameters.AddWithValue("@cusid", (cust.getKeys())[0]);
+                comm.Parameters.AddWithValue("@addressid", (cust.getKeys())[1]);
+                comm.Parameters.AddWithValue("@cityid", (cust.getKeys())[2]);
+                comm.Parameters.AddWithValue("@countryid", (cust.getKeys())[3]);
+                try
+                {
+                    conn.Open();
+                    comm.ExecuteNonQuery();
+                    conn.Close();
+                    scheduler.InitializeDatabase(this);
+                }
+                catch
+                {
+                    MessageBox.Show("Could not connect to database!");
+                }
+            }
         }
 
         private void modify_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void monthBox_CheckedChanged(object sender, EventArgs e)
-        {
-            monthCalendar1_DateChanged(sender, null);
-        }
-
-        private void pastBox_CheckedChanged(object sender, EventArgs e)
-        {
-            monthCalendar1_DateChanged(sender, null);
-        }
-
-        private void generateReports_Click(object sender, EventArgs e)
-        {
-            
-            Func<string> AbT = () =>
+            if (index == 0)
             {
-                List<string> report1 = new List<string>() { $"All appointments counted by type:\n" };
-                string allbytype = "select type, COUNT(*) as Amount from appointment group by type;";
-                var conn = scheduler.getdatabase();
-                var comm = scheduler.createQuery(conn, allbytype);
-
-                conn.Open();
-                var reader = comm.ExecuteReader();
-                while (reader.Read())
+               // try
                 {
-                    
-                    report1.Add($"{reader.GetString(0)}: {reader.GetInt64(1).ToString()}\n");
+                    //if you have been brought here due to an exception please press continue.
+                    //VS while running in debugging decides to throw this error even though it is handled.
+                    //This error would not happen when running the application normally.
+                    meeting meets = (appointmentGrid.CurrentRow.DataBoundItem) as meeting;
+                    MeetingForm meet = new MeetingForm(meets, meetingsList, customersList, curUser, this);
+                    meet.ShowDialog();
                 }
-                string report2 = string.Empty;
-                foreach (string report in report1)
+                //catch
                 {
-                    report2 = report2 + report;
+                    //MessageBox.Show("No Meeting is selected / available to modify.");
                 }
-                return report2;
-            };
-
-            MessageBox.Show(AbT());
-
-            Func<string> SbU = () =>
+            }
+            else if (index == 1)
             {
-                string getuser = "select userName from user;";
-                string schedulebyuser = "The schedule for each user:\n";
-                List<string> userNames = new List<string>();
-                var conn = scheduler.getdatabase();
-                var comm = scheduler.createQuery(conn, getuser);
-                conn.Open();
-                var reader = comm.ExecuteReader();
-                while (reader.Read())
+                //DataGridViewRow row = new DataGridViewRow();
+                Customer customer = (customerGrid.CurrentRow.DataBoundItem) as Customer;
+                customerForm cust = new customerForm(customer, curUser, this);
+                cust.ShowDialog();
+            }
+        }
+
+            private void monthBox_CheckedChanged(object sender, EventArgs e)
+            {
+                monthCalendar1_DateChanged(null, null);
+            }
+
+            public void pastBox_CheckedChanged(object sender, EventArgs e)
+            {
+                monthCalendar1_DateChanged(null, null);
+            }
+
+            private void generateReports_Click(object sender, EventArgs e)
+            {
+
+                Func<string> AbT = () =>
                 {
-                    userNames.Add(reader.GetString(0));
-                }
-                conn.Close();
-                conn = scheduler.getdatabase();
-                
-                foreach (string user in userNames)
-                {
-                    comm = scheduler.createQuery(conn, $@"select a.start, a.end from appointment as a
-                                                            left join user as u on a.userId = u.userId
-                                                            where u.userName = '{user}';");
+                    List<string> report1 = new List<string>() { $"All appointments counted by type:\n" };
+                    string allbytype = "select type, COUNT(*) as Amount from appointment group by type;";
+                    var conn = scheduler.getdatabase();
+                    var comm = scheduler.createQuery(conn, allbytype);
+
                     conn.Open();
-                    reader = comm.ExecuteReader(0);
-                    schedulebyuser += $"Schedule for {user}:\n";
+                    var reader = comm.ExecuteReader();
                     while (reader.Read())
                     {
-                        schedulebyuser += $"Busy: {reader.GetDateTime(0).ToLocalTime().ToString()} through {reader.GetDateTime(0).ToLocalTime().ToString()}\n";
+
+                        report1.Add($"{reader.GetString(0)}: {reader.GetInt64(1).ToString()}\n");
+                    }
+                    string report2 = string.Empty;
+                    foreach (string report in report1)
+                    {
+                        report2 = report2 + report;
+                    }
+                    return report2;
+                };
+
+                MessageBox.Show(AbT());
+
+                Func<string> SbU = () =>
+                {
+                    string getuser = "select userName from user;";
+                    string schedulebyuser = "The schedule for each user:\n";
+                    List<string> userNames = new List<string>();
+                    var conn = scheduler.getdatabase();
+                    var comm = scheduler.createQuery(conn, getuser);
+                    conn.Open();
+                    var reader = comm.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        userNames.Add(reader.GetString(0));
+                    }
+                    conn.Close();
+                    conn = scheduler.getdatabase();
+
+                    foreach (string user in userNames)
+                    {
+                        comm = scheduler.createQuery(conn, $@"select a.start, a.end from appointment as a
+                                                            left join user as u on a.userId = u.userId
+                                                            where u.userName = '{user}';");
+                        conn.Open();
+                        reader = comm.ExecuteReader(0);
+                        schedulebyuser += $"Schedule for {user}:\n";
+                        while (reader.Read())
+                        {
+                            schedulebyuser += $"Busy: {reader.GetDateTime(0).ToLocalTime().ToString()} through {reader.GetDateTime(0).ToLocalTime().ToString()}\n";
+
+                        }
 
                     }
+                    return schedulebyuser;
+                };
+                MessageBox.Show(SbU());
 
-                }
-                return schedulebyuser;
-            };
-            MessageBox.Show(SbU());
-
-            Func<string> AbC = () =>
-            {
-                string customers = "select c.customerName, COUNT(*) from appointment as a left join customer as c on c.customerId = a.customerId group by c.customerName;";
-                string report = "Total count of meetings per customer:\n";
-
-                var conn = scheduler.getdatabase();
-                var comm = scheduler.createQuery(conn, customers);
-
-                conn.Open();
-                var reader = comm.ExecuteReader();
-                while (reader.Read())
+                Func<string> AbC = () =>
                 {
-                    report += $"{reader.GetString(0)} has {reader.GetInt32(1).ToString()} total meetings.\n";
-                }
+                    string customers = "select c.customerName, COUNT(*) from appointment as a left join customer as c on c.customerId = a.customerId group by c.customerName;";
+                    string report = "Total count of meetings per customer:\n";
 
-                return report;
-            };
-            MessageBox.Show(AbC());
+                    var conn = scheduler.getdatabase();
+                    var comm = scheduler.createQuery(conn, customers);
+
+                    conn.Open();
+                    var reader = comm.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        report += $"{reader.GetString(0)} has {reader.GetInt32(1).ToString()} total meetings.\n";
+                    }
+
+                    return report;
+                };
+                MessageBox.Show(AbC());
+            }
         }
+    
     }
-}
+
