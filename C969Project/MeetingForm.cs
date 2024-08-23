@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -15,13 +16,20 @@ using Google.Protobuf.WellKnownTypes;
 using Scheduling_Software;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Utilities;
+using System.Security.Cryptography;
 
 namespace C969Project
 {
     public partial class MeetingForm : Form
     {
-        List<string> hours = new List<string> { "09", "10", "11", "12", "13", "14", "15", "16", "17" };
+        int offset = (DateTime.UtcNow - TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"))).Hours;
+        List<string> hours = new List<string> {"01","02","03","04","05","06","07","08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21","22","23","00" };
         List<string> minutes = new List<string> { "00", "15", "30","45"};
+        List<string> localhours = new List<string>();
+        DateTime BusinessStart = new DateTime(2024,8,22,8,0,0, DateTimeKind.Unspecified) ; //(2001,01,01,09,0,0);
+        DateTime BusinessEnd = new DateTime(2024, 8, 22, 8, 0, 0, DateTimeKind.Unspecified);  //(2001, 01, 01, 17, 0, 0);
+        DateTime localbusend;
+        DateTime localbusstart;
 
         DayOfWeek[] InvalidDay = { DayOfWeek.Saturday, DayOfWeek.Sunday };
         List<meeting> meetingsList;
@@ -33,14 +41,23 @@ namespace C969Project
         meeting updateMeet;
         public MeetingForm(meeting meet, List<meeting>meets, List<Customer> custs, user User, Schedule s)
         {
+            BusinessStart = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); BusinessStart = BusinessStart.Date.AddHours(09);
+            BusinessEnd = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); BusinessEnd = BusinessEnd.Date.AddHours(17);
+            
+            BusinessStart = TimeZoneInfo.ConvertTimeToUtc(BusinessStart, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+            BusinessEnd = TimeZoneInfo.ConvertTimeToUtc(BusinessEnd, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+            localbusend = TimeZoneInfo.ConvertTimeFromUtc(BusinessEnd, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id));
+            localbusstart = TimeZoneInfo.ConvertTimeFromUtc(BusinessStart, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id));
             meetingsList = meets;
             customersList = custs;
             InitializeComponent();
             
-            startDate.MinDate = DateTime.Now.Date;
-            endDate.MinDate = DateTime.Now.Date;
+            
+            //startDate.MinDate = DateTime.Now.Date;
+            //endDate.MinDate = DateTime.Now.Date;
             curUser = User;
             sched = s;
+            initDates(localbusstart, localbusend);
             configureGrid();
             if (meet != null)
             {
@@ -49,16 +66,27 @@ namespace C969Project
             }
             else
             {
-                endHour.Text = "09";
-                endMinute.Text = "15";
-                startHour.Text = "09";
-                startMinute.Text = "00";
                 
+
             }
+        }
+        private void initDates(DateTime start, DateTime end)
+        {
+            startDate.MinDate = start;
+            startDate.MaxDate = end.AddMinutes(-15);
+            endDate.MinDate = start.AddMinutes(15);
+            endDate.MaxDate = end;
+            datepicker.MinDate = start.Date;
+            datepicker.Value = start;
+
+            
+
         }
 
         private void fillFields(meeting meet)
-        {
+        { 
+
+            
             titleBox.Text = meet.Title;
             locationBox.Text = meet.Location;
             contactBox.Text = meet.Contact;
@@ -66,14 +94,13 @@ namespace C969Project
             urlBox.Text = meet.Url;
             descriptionBox.Text = meet.Description;
             searchBox.Text = meet.Customer;
-            startDate.Value = meet.Start; 
-            endDate.Value = meet.End;
-            endMinute.Text = meet.End.ToString("mm");
-            endHour.Text = meet.End.ToString("HH");                       
-            startHour.Text = meet.Start.ToString("HH");            
-            startMinute.Text = meet.Start.ToString("mm");
-            checkEndBox();
-            checkStartBox();
+            
+
+            
+            
+            //initDates();
+
+            checkDates();
         }
         private void submitButton_Click_1(object sender, EventArgs e)
         {
@@ -97,22 +124,11 @@ namespace C969Project
 
             }
             else 
-            {DateTime start;
-            DateTime end;
-            string starttime = $"{startDate.Value.Year:D4}-{startDate.Value.Month:D2}-{startDate.Value.Day:D2} {startHour.Text:D2}:{startMinute.Text:D2}:00";
-            string endtime = $"{endDate.Value.Year:D4}-{endDate.Value.Month:D2}-{endDate.Value.Day:D2} {endHour.Text:D2}:{endMinute.Text:D2}:00";
+            {
             
-            // Parse the string into a DateTime object
+            
 
-            bool success = DateTime.TryParseExact(starttime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out start);
-
-                if (success)
-                {
-
-
-                    success = DateTime.TryParseExact(endtime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out end);
-
-                    if (success)
+            
                     {
                         DateTime timestamp = DateTime.UtcNow;
                         DataGridViewRow row = new DataGridViewRow();
@@ -125,8 +141,8 @@ namespace C969Project
                         string cont = contactBox.Text;
                         string type = typeBox.Text;
                         string url = urlBox.Text;
-                        string startd = start.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
-                        string endd = end.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                        string startd = startDate.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
+                        string endd = endDate.Value.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss");
                         string create = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
                         string createby = curUser.userName;
                         string update = timestamp.ToString("yyyy-MM-dd HH:mm:ss");
@@ -196,16 +212,16 @@ namespace C969Project
                         {
                             if (updateMeet != null)
                             { if (meet.getKey() == updateMeet.getKey()) { continue; } }
-                            if (start < meet.Start || start > meet.End)
+                            if (startDate.Value < meet.Start || startDate.Value > meet.End)
                             {
-                                if (end < meet.Start || end > meet.End)
+                                if (endDate.Value < meet.Start || endDate.Value > meet.End)
                                 {
-                                    if (meet.Start > start && meet.Start < end)
+                                    if (meet.Start > startDate.Value && meet.Start < endDate.Value)
                                     {
                                         secure = false;
                                         MessageBox.Show($"Unable to schedule this meeting at the same time as the meeting with {meet.Customer} \n This meeting is from {meet.Start} to {meet.End}");
                                     }
-                                    else { if (end == start) { secure = false; MessageBox.Show("Cannot have a meeting with the same start and end time."); } }
+                                    else { if (endDate == startDate) { secure = false; MessageBox.Show("Cannot have a meeting with the same start and end time."); } }
 
                                 }
                                 else
@@ -241,48 +257,58 @@ namespace C969Project
                         }
                         //MessageBox.Show(start.ToString() + end.ToString());
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please confirm end date and time is set.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please confirm start date and time is set.");
+                   
                 }
             }
         }
 
         private void startDate_ValueChanged(object sender, EventArgs e)
         {
-            bool valid = dateIsValid(startDate);
-            if (valid)
-            {
-                endDate.MinDate = startDate.Value;
+            
+                try
+                {
+                   if (startDate.Value.Minute > 45)
+                    {
+                        var diff = 60 - startDate.Value.Minute;
+                        startDate.Value = startDate.Value.AddMinutes(diff);
+                        
+                    }
+                    else if (startDate.Value.Minute > 30)
+                        {
+                    var diff = 45 - startDate.Value.Minute;
+                    startDate.Value = startDate.Value.AddMinutes(diff);
+                }
+                        else if (startDate.Value.Minute > 15)
+                    {
+                    var diff = 30 - startDate.Value.Minute;
+                    startDate.Value = startDate.Value.AddMinutes(diff);
+                }
+                    else if (startDate.Value.Minute > 00)
+                    {
+                    var diff = 15 - startDate.Value.Minute;
+                    startDate.Value = startDate.Value.AddMinutes(diff);
+                }
+                //endDate.Value = startDate.Value.AddMinutes(15);
+                //endDate.MinDate = startDate.Value;
+                
             }
-            else
-            {
-                if ( DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+                catch(Exception ex)
                 {
-                    startDate.Value.AddDays(1);
-                }else if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    startDate.Value.AddDays(2);
-                }else
-                {
-                    startDate.Value = DateTime.Now;
+                MessageBox.Show("error" + ex.ToString());
+                
+                //endDate.MinDate = startDate.Value;
+                    //endDate.MaxDate = startDate.Value.AddHours(8);
+                    
                 }
                 
-                MessageBox.Show("Scheduling is only possible Monday-Friday");
-            }
+           
             
             
         }
         private bool dateIsValid (DateTimePicker picker)
         {
             foreach (DayOfWeek Day in InvalidDay) {
-                if (picker.Value.DayOfWeek == Day)
+                if (picker.Value.ToUniversalTime().DayOfWeek == Day)
                 {
                     return false;
                 }
@@ -321,154 +347,132 @@ namespace C969Project
 
         private void endDate_ValueChanged(object sender, EventArgs e)
         {
-            bool valid = dateIsValid(endDate);
-            if (valid)
+            try
             {
-                
+                if (endDate.Value.Minute > 45)
+                {
+                    var diff = 60 - endDate.Value.Minute;
+                    endDate.Value = endDate.Value.AddMinutes(diff);
+                    endDate.MinDate = startDate.Value;
+                    endDate.Value = startDate.Value.AddMinutes(15);
+
+                }
+                else if (endDate.Value.Minute > 30)
+                {
+                    var diff = 45 - endDate.Value.Minute;
+                    endDate.Value = endDate.Value.AddMinutes(diff);
+                    endDate.MinDate = startDate.Value;
+                    endDate.Value = startDate.Value.AddMinutes(15);
+                }
+                else if (endDate.Value.Minute > 15)
+                {
+                    var diff = 30 - endDate.Value.Minute;
+                    endDate.Value = endDate.Value.AddMinutes(diff);
+                    endDate.MinDate = startDate.Value;
+                    endDate.Value = startDate.Value.AddMinutes(15);
+                }
+                else if (endDate.Value.Minute > 00)
+                {
+                    var diff = 15 - endDate.Value.Minute;
+                    endDate.Value = endDate.Value.AddMinutes(diff);
+                    endDate.MinDate = startDate.Value;
+                    endDate.Value = startDate.Value.AddMinutes(15);
+                }
             }
-            else
-            {
-                endDate.Value = startDate.Value;
-                MessageBox.Show("Scheduling is only possible Monday-Friday");
+            catch { }
             }
-        }
 
         private void searchBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                var zip = searchBox.Text;
+                if (searchBox.Text == "")
+                {
+                    customers.DataSource = customersList;
+                }
+                else if (searchBox.Text.Any(c => char.IsDigit(c) || c == '-'))
+                {
+                    
+                    string zip = searchBox.Text;
 
-                var filteredList = customersList.Where(p => p.Zipcode == zip).ToList();
-                customers.DataSource = filteredList;
+                    var filteredList = customersList.Where(p => p.Zipcode.Contains(zip) ).ToList();
+                    customers.DataSource = filteredList;
+
+
+                }
+                else
+                {
+                    string name = searchBox.Text;
+                    
+                    var filteredList = customersList.Where(p => p.CustomerName.ToLower().Contains(name.ToLower())).ToList();
+
+                    customers.DataSource = filteredList;
+                }
 
             }
             catch
             {
-                string name = searchBox.Text;
-
-                var filteredList = customersList.Where(p => p.CustomerName.ToLower().Contains(name.ToLower()) ).ToList();
-                customers.DataSource = filteredList;
-
-            }
-            if (searchBox.Text == "")
-            {
-                customers.DataSource = customersList;
-            }
-        }
-
-
-
-        private void checkEndBox()
-        {
-            if (endHour.Text == startHour.Text && startMinute.Text == "45")
-            {
                 
-                
-                endMinute.Items.Clear();
-                foreach (string min in minutes)
-                {
-                    endHour.Items.Add(min);
-                }
-                
-                endMinute.Text = minutes[0];
-                
-            }
-            else if (endHour.Text == startHour.Text)
-            {
-
-                var holder = endMinute.Text;
-                var sorted = minutes.Where(p => int.Parse(p) > int.Parse(startMinute.Text)).ToList();
-                endMinute.Items.Clear();
-                foreach (string min in sorted)
-                {
-                    endMinute.Items.Add(min);
-                }
-                if (int.Parse(holder) < int.Parse(startMinute.Text))
-                {
-                    endMinute.Text = sorted[0];
-                }
-                else
-                {
-                    endMinute.Text = holder;
-                }
-            }
-            else if (endHour.Text == "17")
-            {
-                endMinute.Items.Clear();
-                endMinute.Items.Add("00");
-                endMinute.Text = "00";
-            }
-            else
-            {
-                endMinute.Items.Clear();
-                foreach (string min in minutes)
-                {
-                    endMinute.Items.Add(min);
-                }
-                endMinute.Text = minutes[0];
-            }
-        }
-        private void checkStartBox()
-        {
-
-            if(startMinute.Text == "45")
-            {
-                var holder = endHour.Text;
-                var sorted = hours.Where(p => int.Parse(p) > int.Parse(startHour.Text)).ToList();
-                endHour.Items.Clear();
-                foreach (string hour in sorted)
-                {
-                    endHour.Items.Add(hour);
-                }
-                if(int.Parse(holder) < int.Parse(sorted[0]))
-                {
-                    endHour.Text = sorted[0];
-                }
-                else
-                {
-                    endHour.Text = holder;
-                }
-            }
-            else
-            { 
-                
-                var holder = endHour.Text;
-                var sorted = hours.Where(p => int.Parse(p) >= int.Parse(startHour.Text)).ToList();
-                endHour.Items.Clear();
-                foreach (string hour in sorted)
-                {
-                    endHour.Items.Add(hour);
-                }
-                if (int.Parse(holder) <= int.Parse(sorted[0]))
-                {
-                    endHour.Text = sorted[0];
-                }
-                else
-                {
-                    endHour.Text = holder;
-                }
 
             }
-        }
-
-        private void startHour_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            checkStartBox();
-            checkEndBox();
-        }
-
-        private void startMinute_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            checkStartBox();
-            checkEndBox();
-        }
-
-        private void endHour_SelectionChangeCommitted(object sender, EventArgs e)
-        {
             
-            checkStartBox();
-            checkEndBox();
+        }
+
+
+
+        
+        private void checkDates()
+        {
+            endDate.MinDate = startDate.Value;
+            MessageBox.Show(endDate.MinDate.ToString() + "4");
+        }
+
+        
+
+        private void searchBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || e.KeyChar == '-')
+            {
+                
+            }
+            else
+            {
+                
+            }
+            
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            var diff = (datepicker.Value - localbusstart);
+            try
+            {
+                
+                if(BusinessStart.Add(diff).DayOfWeek != DayOfWeek.Sunday && BusinessStart.Add(diff).DayOfWeek != DayOfWeek.Saturday)
+                {
+                    endDate.MaxDate = localbusend.Add(diff);
+                    startDate.MaxDate = localbusend.Add(diff).AddMinutes(-15);
+                    startDate.Value = localbusstart.Add(diff);
+                    endDate.Value = localbusstart.Add(diff).AddMinutes(15);
+                    endDate.MinDate = localbusstart.Add(diff).AddMinutes(15);
+                    startDate.MinDate = localbusstart.Add(diff);
+                }
+
+                //endDate.MinDate = datepicker.Value;
+               // startDate.MinDate = datepicker.Value;
+            }
+            catch
+            {
+                //startDate.MinDate = datepicker.Value;
+                endDate.MinDate = localbusstart.Add(diff).AddMinutes(15);
+                startDate.MinDate = localbusstart.Add(diff);
+                endDate.Value = localbusstart.Add(diff).AddMinutes(15);
+                startDate.Value = localbusstart.Add(diff);
+                endDate.MaxDate = localbusend.Add(diff);
+                startDate.MaxDate = localbusend.Add(diff).AddMinutes(-15);
+            }
+            
         }
     }
 }

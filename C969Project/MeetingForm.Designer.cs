@@ -42,10 +42,6 @@
             this.typeBox = new System.Windows.Forms.TextBox();
             this.contactBox = new System.Windows.Forms.TextBox();
             this.locationBox = new System.Windows.Forms.TextBox();
-            this.endMinute = new System.Windows.Forms.ComboBox();
-            this.startMinute = new System.Windows.Forms.ComboBox();
-            this.endHour = new System.Windows.Forms.ComboBox();
-            this.startHour = new System.Windows.Forms.ComboBox();
             this.endDate = new System.Windows.Forms.DateTimePicker();
             this.startDate = new System.Windows.Forms.DateTimePicker();
             this.descriptionBox = new System.Windows.Forms.RichTextBox();
@@ -56,6 +52,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.searchBox = new System.Windows.Forms.TextBox();
+            this.datepicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -86,6 +83,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.datepicker);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
@@ -98,10 +96,6 @@
             this.panel1.Controls.Add(this.typeBox);
             this.panel1.Controls.Add(this.contactBox);
             this.panel1.Controls.Add(this.locationBox);
-            this.panel1.Controls.Add(this.endMinute);
-            this.panel1.Controls.Add(this.startMinute);
-            this.panel1.Controls.Add(this.endHour);
-            this.panel1.Controls.Add(this.startHour);
             this.panel1.Controls.Add(this.endDate);
             this.panel1.Controls.Add(this.startDate);
             this.panel1.Controls.Add(this.descriptionBox);
@@ -218,88 +212,15 @@
             this.locationBox.Size = new System.Drawing.Size(163, 20);
             this.locationBox.TabIndex = 28;
             // 
-            // endMinute
-            // 
-            this.endMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.endMinute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.endMinute.FormattingEnabled = true;
-            this.endMinute.Items.AddRange(new object[] {
-            "00",
-            "15",
-            "30",
-            "45"});
-            this.endMinute.Location = new System.Drawing.Point(373, 79);
-            this.endMinute.MaxDropDownItems = 4;
-            this.endMinute.Name = "endMinute";
-            this.endMinute.Size = new System.Drawing.Size(38, 21);
-            this.endMinute.TabIndex = 27;
-            // 
-            // startMinute
-            // 
-            this.startMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.startMinute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.startMinute.FormattingEnabled = true;
-            this.startMinute.Items.AddRange(new object[] {
-            "00",
-            "15",
-            "30",
-            "45"});
-            this.startMinute.Location = new System.Drawing.Point(373, 39);
-            this.startMinute.MaxDropDownItems = 4;
-            this.startMinute.Name = "startMinute";
-            this.startMinute.Size = new System.Drawing.Size(38, 21);
-            this.startMinute.TabIndex = 26;
-            this.startMinute.SelectionChangeCommitted += new System.EventHandler(this.startMinute_SelectionChangeCommitted);
-            // 
-            // endHour
-            // 
-            this.endHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.endHour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.endHour.FormattingEnabled = true;
-            this.endHour.Items.AddRange(new object[] {
-            "09",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17"});
-            this.endHour.Location = new System.Drawing.Point(329, 79);
-            this.endHour.Name = "endHour";
-            this.endHour.Size = new System.Drawing.Size(38, 21);
-            this.endHour.TabIndex = 25;
-            this.endHour.SelectionChangeCommitted += new System.EventHandler(this.endHour_SelectionChangeCommitted);
-            // 
-            // startHour
-            // 
-            this.startHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.startHour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.startHour.FormattingEnabled = true;
-            this.startHour.Items.AddRange(new object[] {
-            "09",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16"});
-            this.startHour.Location = new System.Drawing.Point(329, 39);
-            this.startHour.Name = "startHour";
-            this.startHour.Size = new System.Drawing.Size(38, 21);
-            this.startHour.TabIndex = 24;
-            this.startHour.SelectionChangeCommitted += new System.EventHandler(this.startHour_SelectionChangeCommitted);
-            // 
             // endDate
             // 
             this.endDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.endDate.CustomFormat = "yyyy-MM-dd";
+            this.endDate.CustomFormat = "yyyy-MM-dd HH:mm";
             this.endDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.endDate.Location = new System.Drawing.Point(229, 80);
+            this.endDate.Location = new System.Drawing.Point(256, 81);
             this.endDate.Name = "endDate";
-            this.endDate.Size = new System.Drawing.Size(92, 20);
+            this.endDate.ShowUpDown = true;
+            this.endDate.Size = new System.Drawing.Size(155, 20);
             this.endDate.TabIndex = 23;
             this.endDate.Value = new System.DateTime(2024, 8, 19, 11, 48, 56, 0);
             this.endDate.ValueChanged += new System.EventHandler(this.endDate_ValueChanged);
@@ -307,11 +228,12 @@
             // startDate
             // 
             this.startDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.startDate.CustomFormat = "yyyy-MM-dd";
+            this.startDate.CustomFormat = "yyyy-MM-dd HH:mm";
             this.startDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.startDate.Location = new System.Drawing.Point(229, 40);
+            this.startDate.Location = new System.Drawing.Point(256, 41);
             this.startDate.Name = "startDate";
-            this.startDate.Size = new System.Drawing.Size(92, 20);
+            this.startDate.ShowUpDown = true;
+            this.startDate.Size = new System.Drawing.Size(155, 20);
             this.startDate.TabIndex = 22;
             this.startDate.ValueChanged += new System.EventHandler(this.startDate_ValueChanged);
             // 
@@ -406,6 +328,17 @@
             this.searchBox.Size = new System.Drawing.Size(197, 20);
             this.searchBox.TabIndex = 0;
             this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
+            this.searchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchBox_KeyPress);
+            // 
+            // datepicker
+            // 
+            this.datepicker.CustomFormat = "yyyy-MM-dd";
+            this.datepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datepicker.Location = new System.Drawing.Point(314, 15);
+            this.datepicker.Name = "datepicker";
+            this.datepicker.Size = new System.Drawing.Size(97, 20);
+            this.datepicker.TabIndex = 40;
+            this.datepicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // MeetingForm
             // 
@@ -441,10 +374,6 @@
         private System.Windows.Forms.TextBox typeBox;
         private System.Windows.Forms.TextBox contactBox;
         private System.Windows.Forms.TextBox locationBox;
-        private System.Windows.Forms.ComboBox endMinute;
-        private System.Windows.Forms.ComboBox startMinute;
-        private System.Windows.Forms.ComboBox endHour;
-        private System.Windows.Forms.ComboBox startHour;
         private System.Windows.Forms.DateTimePicker endDate;
         private System.Windows.Forms.DateTimePicker startDate;
         private System.Windows.Forms.RichTextBox descriptionBox;
@@ -460,5 +389,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.DateTimePicker datepicker;
     }
 }

@@ -17,6 +17,7 @@ namespace C969Project
 
     partial class Mainscheduler
     {
+        
         string popcustomer = @"
             select c.customerId, c.customerName, a.address, a.address2, ci.city, a.postalCode, co.country, a.phone, a.addressId, ci.cityId, co.countryId, c.active
             from customer as c
@@ -125,6 +126,7 @@ namespace C969Project
 
     public class meeting
     {
+
         private int MeetingID { get; set; }
         private int CustomerID { get;  set; }
         public string Customer { get; set; }
@@ -140,6 +142,7 @@ namespace C969Project
 
         public meeting( int customerID, string customer, string user, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end, int meetingid)
         {
+            var offset = (DateTime.Now - DateTime.UtcNow).Hours;
             MeetingID = meetingid;
             CustomerID = customerID; 
             Customer = customer;
@@ -150,8 +153,8 @@ namespace C969Project
             Contact = contact;
             Type = type;
             Url = url;
-            Start = start.ToLocalTime();
-            End = end.ToLocalTime();
+            Start = TimeZoneInfo.ConvertTimeFromUtc(start, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id));
+            End = TimeZoneInfo.ConvertTimeFromUtc(end, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id));
 
         }
         public int getKey()

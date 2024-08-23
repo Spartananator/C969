@@ -211,7 +211,7 @@ namespace Scheduling_Software
         {
             if (index == 0)
             {
-               // try
+                try
                 {
                     //if you have been brought here due to an exception please press continue.
                     //VS while running in debugging decides to throw this error even though it is handled.
@@ -220,9 +220,9 @@ namespace Scheduling_Software
                     MeetingForm meet = new MeetingForm(meets, meetingsList, customersList, curUser, this);
                     meet.ShowDialog();
                 }
-                //catch
+                catch
                 {
-                    //MessageBox.Show("No Meeting is selected / available to modify.");
+                    MessageBox.Show("No Meeting is selected / available to modify.");
                 }
             }
             else if (index == 1)
