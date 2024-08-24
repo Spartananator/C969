@@ -269,31 +269,53 @@ namespace C969Project
                 {
                 if (startDate.Value.Minute == 46)
                 {
+
+                    if(startDate.Value == startDate.MaxDate.AddMinutes(-1))
+                    {
+                        startDate.Value = startDate.Value.AddMinutes(-1);
+                    }
+                    else 
+                    {
                     var diff = 60 - startDate.Value.Minute;
                     startDate.Value = startDate.Value.AddMinutes(diff);
                     endDate.MinDate = startDate.Value;
-                    endDate.Value = startDate.Value.AddMinutes(15);
+                        endDate.Value = startDate.Value.AddMinutes(15);
+                    }
+                    
 
+                }else if (startDate.Value.Minute == 47)
+                {
+                    startDate.Value = startDate.MaxDate.AddHours(-1).AddMinutes(-2);
+                    startDate.MaxDate = localbusend.AddMinutes(-15);
                 }
                 else if (startDate.Value.Minute == 59)
                 {
-                    var diff = 45 - startDate.Value.Minute;
-                    startDate.Value = startDate.Value.AddMinutes(diff);
-                    startDate.Value = startDate.Value.AddHours(-1);
+                    if (startDate.MinDate.AddHours(1) == startDate.Value.AddMinutes(1))
+                    {
+                        
+                        startDate.Value = startDate.MinDate;
+                    }else
+                    {
+                        
+                        var diff = 45 - startDate.Value.Minute;
+                        startDate.Value = startDate.Value.AddMinutes(diff);
+                        startDate.Value = startDate.Value.AddHours(-1);
+                        endDate.MinDate = startDate.Value.AddMinutes(15);
+                        endDate.Value = startDate.Value.AddMinutes(15);
+                    }
                     
-                    endDate.Value = startDate.Value.AddMinutes(15);
-                    endDate.MinDate = startDate.Value.AddMinutes(15);
                 }
                 else if (startDate.Value.Minute == 14)
                 {
                     var diff = (00 - startDate.Value.Minute);
                     startDate.Value = startDate.Value.AddMinutes(-14);
-                    
-                    endDate.Value = startDate.Value.AddMinutes(15);
                     endDate.MinDate = startDate.Value.AddMinutes(15);
+                    endDate.Value = startDate.Value.AddMinutes(15);
+                    
                 }
                 else if (startDate.Value.Minute == 31)
                 {
+                    
                     var diff = 45 - startDate.Value.Minute;
                     startDate.Value = startDate.Value.AddMinutes(diff);
                     
@@ -303,27 +325,59 @@ namespace C969Project
                 else if (startDate.Value.Minute == 16 || startDate.Value.Minute == 44)
                 {
                     var diff = 30 - startDate.Value.Minute;
-                    startDate.Value = startDate.Value.AddMinutes(diff);
+                    if (startDate.Value.Minute == 44)
+                    {
+                        startDate.Value = startDate.Value.AddMinutes(diff);
+                        endDate.MinDate = startDate.Value.AddMinutes(15);
+                        endDate.Value = startDate.Value.AddMinutes(15);
+                        
+                    }
+                    else
+                    {
+                        startDate.Value = startDate.Value.AddMinutes(diff);
+
+                        endDate.Value = startDate.Value.AddMinutes(15);
+                        endDate.MinDate = startDate.Value.AddMinutes(15);
+                    };
                     
-                    endDate.Value = startDate.Value.AddMinutes(15);
-                    endDate.MinDate = startDate.Value.AddMinutes(15);
                 }
                 else if (startDate.Value.Minute == 01 || startDate.Value.Minute == 29)
                 {
                     var diff = 15 - startDate.Value.Minute;
-                    startDate.Value = startDate.Value.AddMinutes(diff);
+                    if (startDate.Value.Minute == 29)
+                    {
+                        startDate.Value = startDate.Value.AddMinutes(diff);
+                        endDate.MinDate = startDate.Value.AddMinutes(15);
+                        endDate.Value = startDate.Value.AddMinutes(15);
+                        
+                    }
+                    else
+                    {
+                        startDate.Value = startDate.Value.AddMinutes(diff);
+                        
+                        endDate.Value = startDate.Value.AddMinutes(15);
+                        endDate.MinDate = startDate.Value.AddMinutes(15);
+                    }
+                    
 
-                    endDate.Value = startDate.Value.AddMinutes(15);
-                    endDate.MinDate = startDate.Value.AddMinutes(15); ;
                 }
-            
+                else if (startDate.Value == startDate.MaxDate)
+                {
+                    startDate.MaxDate = startDate.MaxDate.AddMinutes(2);
+                    //startDate.Value = startDate.MaxDate.AddHours(-1);
+                }
+                else
+                {
+                    endDate.MinDate = startDate.Value.AddMinutes(15);
+                    endDate.Value = startDate.Value.AddMinutes(15);
+                }
                 //endDate.Value = startDate.Value.AddMinutes(15);
                 //endDate.MinDate = startDate.Value;
-                
+
             }
                 catch(Exception ex)
                 {
-                MessageBox.Show("error" + ex.ToString());
+                MessageBox.Show("Do not set the end date before the start date, \nnor as the same time as the start date.");
                 
                 //endDate.MinDate = startDate.Value;
                     //endDate.MaxDate = startDate.Value.AddHours(8);
@@ -419,6 +473,7 @@ namespace C969Project
                     endDate.MinDate = startDate.Value;
                     //endDate.Value = startDate.Value.AddMinutes(15);
                 }
+                
             }
             catch { }
             }
@@ -465,7 +520,7 @@ namespace C969Project
         private void checkDates()
         {
             endDate.MinDate = startDate.Value;
-            MessageBox.Show(endDate.MinDate.ToString() + "4");
+            
         }
 
         
@@ -483,9 +538,20 @@ namespace C969Project
             
 
         }
+        private void setTime(DateTime time)
+        {
+            BusinessStart = TimeZoneInfo.ConvertTimeFromUtc(time, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); BusinessStart = BusinessStart.Date.AddHours(09);
+            BusinessEnd = TimeZoneInfo.ConvertTimeFromUtc(time, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time")); BusinessEnd = BusinessEnd.Date.AddHours(17);
+
+            BusinessStart = TimeZoneInfo.ConvertTimeToUtc(BusinessStart, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+            BusinessEnd = TimeZoneInfo.ConvertTimeToUtc(BusinessEnd, TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"));
+            localbusend = TimeZoneInfo.ConvertTimeFromUtc(BusinessEnd, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id));
+            localbusstart = TimeZoneInfo.ConvertTimeFromUtc(BusinessStart, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id));
+        }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
+            setTime(datepicker.Value.ToUniversalTime());
             var diff = (datepicker.Value - localbusstart);
             try
             {
@@ -515,5 +581,7 @@ namespace C969Project
             }
             
         }
+
+        
     }
 }

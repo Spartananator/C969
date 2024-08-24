@@ -30,6 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.datepicker = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.searchBox = new System.Windows.Forms.TextBox();
-            this.datepicker = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -106,6 +106,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(414, 420);
             this.panel1.TabIndex = 2;
+            // 
+            // datepicker
+            // 
+            this.datepicker.CustomFormat = "yyyy-MM-dd";
+            this.datepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datepicker.Location = new System.Drawing.Point(314, 15);
+            this.datepicker.Name = "datepicker";
+            this.datepicker.Size = new System.Drawing.Size(97, 20);
+            this.datepicker.TabIndex = 40;
+            this.datepicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label5
             // 
@@ -329,16 +339,6 @@
             this.searchBox.TabIndex = 0;
             this.searchBox.TextChanged += new System.EventHandler(this.searchBox_TextChanged);
             this.searchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchBox_KeyPress);
-            // 
-            // datepicker
-            // 
-            this.datepicker.CustomFormat = "yyyy-MM-dd";
-            this.datepicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datepicker.Location = new System.Drawing.Point(314, 15);
-            this.datepicker.Name = "datepicker";
-            this.datepicker.Size = new System.Drawing.Size(97, 20);
-            this.datepicker.TabIndex = 40;
-            this.datepicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // MeetingForm
             // 
